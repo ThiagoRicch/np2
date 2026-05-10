@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guia de Estudos — UNIP</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" href="https://fav.farm/💀">
+<link rel="icon" href="https://fav.farm/🧠">
 <style>
   /* ===== TEMA LÓGICA (escuro/roxo) ===== */
   body.logica {
@@ -25,15 +25,17 @@
     background: var(--bg);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; padding: 0 0 60px; transition: background 0.3s; }
+  * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; }
+  html { overflow-x: hidden; }
+  body { color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; padding: 0 0 60px; transition: background 0.3s; overflow-x: hidden; word-break: break-word; }
 
   /* TOP NAV — matérias */
-  .top-nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; background: var(--bg); }
+  .top-nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; background: var(--bg); width: 100%; overflow: hidden; }
   .top-btn {
-    flex: 1; padding: 18px 24px; font-family: 'Space Mono', monospace; font-size: 12px;
-    letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer;
+    flex: 1; min-width: 0; padding: 16px 12px; font-family: 'Space Mono', monospace; font-size: 11px;
+    letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer;
     background: var(--bg2); color: var(--muted); transition: all 0.2s; border-bottom: 3px solid transparent;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .top-btn.active { color: var(--accent); border-bottom: 3px solid var(--accent); background: var(--bg); }
   .top-btn:hover { color: var(--accent); }
@@ -42,7 +44,7 @@
   body.comp .top-btn { background: #fff; }
   body.comp .top-btn.active { background: var(--accent); color: #fff; border-bottom: 3px solid var(--accent2); }
 
-  .page { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+  .page { max-width: 920px; margin: 0 auto; padding: 40px 24px; width: 100%; }
 
   /* HEADER */
   .header { margin-bottom: 48px; }
@@ -99,6 +101,7 @@
   body.comp .hlb { color: #2979ff; }
 
   /* TABELA */
+  .mt-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
   .mt { width: 100%; border-collapse: collapse; font-family: 'Space Mono', monospace; font-size: 12px; margin-top: 10px; }
   .mt th { color: var(--accent); font-size: 10px; letter-spacing: 1px; padding: 6px 10px; border-bottom: 1px solid var(--border); text-align: left; }
   .mt td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text); font-size: 12px; }
@@ -107,7 +110,7 @@
   body.comp .vc { color: #00c853; } body.comp .ic { color: #ff1744; }
 
   /* CODE BLOCK */
-  .code-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 2.2; color: var(--text); margin-top: 12px; overflow-x: auto; }
+  .code-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 2.2; color: var(--text); margin-top: 12px; overflow-x: auto; max-width: 100%; white-space: pre-wrap; word-break: break-all; }
   .code-block .cy { color: var(--yellow); } .code-block .cg { color: var(--valid); }
   .code-block .cr { color: var(--invalid); } .code-block .cb { color: var(--blue); }
   .code-block .ca { color: var(--accent); } .code-block .cm { color: var(--muted); }
@@ -196,6 +199,140 @@
   body.comp .page { position: relative; }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== RESPONSIVIDADE ===== */
+
+  /* DESKTOP GRANDE (>1200px) */
+  @media (min-width: 1200px) {
+    .page { max-width: 1080px; padding: 48px 40px; }
+    .macete-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .header h1 { font-size: 52px; }
+    .top-btn { font-size: 13px; padding: 20px 32px; }
+    .nav-btn { font-size: 12px; padding: 10px 18px; }
+    .macete-title { font-size: 16px; }
+    .macete-body { font-size: 14px; }
+    .exercise-statement { font-size: 15px; }
+  }
+
+  /* DESKTOP MÉDIO (900px–1200px) */
+  @media (min-width: 900px) and (max-width: 1199px) {
+    .page { max-width: 920px; padding: 40px 28px; }
+    .macete-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  }
+
+  /* TABLET (600px–899px) */
+  @media (min-width: 600px) and (max-width: 899px) {
+    .page { padding: 28px 20px; }
+    .top-btn { font-size: 10px; padding: 14px 12px; letter-spacing: 1px; }
+    .nav { gap: 6px; }
+    .nav-btn { font-size: 10px; padding: 7px 10px; }
+    .macete-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .header h1 { font-size: clamp(24px, 4vw, 36px); }
+    .header { margin-bottom: 32px; }
+    .exercise-body { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .mt { font-size: 11px; }
+    .mt th { font-size: 9px; padding: 5px 8px; }
+    .mt td { padding: 6px 8px; font-size: 11px; }
+    .section-title { font-size: 18px; }
+    .macete-title { font-size: 14px; }
+    .macete-body { font-size: 12px; }
+    .code-block { font-size: 11px; }
+  }
+
+  /* CELULAR (< 600px) */
+  @media (max-width: 599px) {
+    .page { padding: 14px 12px; }
+
+    /* Top nav — duas abas lado a lado com texto menor */
+    .top-nav { flex-direction: row; flex-wrap: nowrap; }
+    .top-btn { font-size: 9px; padding: 12px 6px; letter-spacing: 0.5px; text-align: center; white-space: normal; line-height: 1.3; }
+    .top-btn.active { border-bottom: 3px solid var(--accent); }
+
+    /* Sub nav — scroll horizontal */
+    .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; gap: 6px; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-bottom: 20px; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav-btn { font-size: 9px; padding: 6px 10px; white-space: nowrap; flex-shrink: 0; letter-spacing: 0.5px; }
+
+    /* Header */
+    .header { margin-bottom: 20px; }
+    .header-tag { font-size: 9px; letter-spacing: 1px; }
+    .header h1 { font-size: 22px; letter-spacing: -0.5px; }
+    .header-sub { font-size: 12px; max-width: 100%; }
+    .header-line { margin-top: 20px; }
+
+    /* Grids — tudo coluna única */
+    .macete-grid { grid-template-columns: 1fr !important; gap: 10px; }
+    .macete-card.full { grid-column: 1 !important; }
+    .exercise-body { grid-template-columns: 1fr !important; gap: 10px; padding: 12px; }
+    .answer-block { grid-column: 1 !important; }
+
+    /* Cards */
+    .macete-card { padding: 14px; border-radius: 10px; }
+    .macete-label { font-size: 9px; }
+    .macete-title { font-size: 13px; margin-bottom: 8px; }
+    .macete-body { font-size: 12px; line-height: 1.7; }
+
+    /* Tabelas com scroll */
+    .mt-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border-radius: 8px; }
+    .mt { font-size: 11px; min-width: 360px; }
+    .mt th { font-size: 9px; padding: 5px 8px; }
+    .mt td { padding: 6px 8px; font-size: 11px; }
+
+    /* Code block */
+    .code-block { font-size: 10px; line-height: 1.9; padding: 10px 12px; word-break: break-word; white-space: pre-wrap; }
+
+    /* Exercise cards */
+    .exercise { border-radius: 10px; margin-bottom: 10px; }
+    .exercise-header { padding: 12px 14px; }
+    .exercise-header-left { gap: 8px; }
+    .exercise-number { font-size: 9px; padding: 3px 7px; }
+    .exercise-statement { font-size: 12px; }
+
+    /* Blocks */
+    .block { padding: 12px; border-radius: 8px; }
+    .block-label { font-size: 9px; margin-bottom: 8px; }
+    .phrase { font-size: 12px; line-height: 1.7; }
+    .answer-block { padding: 12px; gap: 10px; flex-direction: row; align-items: flex-start; }
+    .answer-icon { width: 26px; height: 26px; font-size: 12px; flex-shrink: 0; }
+    .answer-name { font-size: 11px; }
+    .answer-desc { font-size: 11px; line-height: 1.6; }
+    .answer-letter { font-size: 9px; padding: 2px 7px; margin-bottom: 4px; }
+
+    /* Símbolos lógica */
+    .symbols { font-size: 10px; line-height: 2; }
+    .symbols .vars { font-size: 10px; }
+
+    /* Hint */
+    .hint { font-size: 11px; padding: 10px 12px; }
+
+    /* Footer */
+    .footer { flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 24px; padding-top: 20px; }
+    .footer-text { font-size: 9px; }
+    .score { font-size: 11px; padding: 6px 12px; }
+
+    /* Section */
+    .section-title { font-size: 16px; }
+    .section-desc { font-size: 11px; margin-bottom: 16px; }
+
+    /* Resp badge */
+    .resp-badge { font-size: 10px; padding: 3px 10px; }
+
+    /* Comp tema no mobile */
+    body.comp .exercise { box-shadow: 2px 2px 0 var(--accent); }
+    body.comp .exercise:hover { box-shadow: 3px 3px 0 var(--accent2); }
+  }
+
+  /* CELULAR PEQUENO (<380px) */
+  @media (max-width: 379px) {
+    .page { padding: 10px 10px; }
+    .header h1 { font-size: 18px; }
+    .top-btn { font-size: 8px; padding: 10px 4px; }
+    .macete-card { padding: 10px; }
+    .exercise-header { padding: 10px 12px; }
+    .code-block { font-size: 9px; }
+    .symbols { font-size: 9px; }
+    .nav-btn { font-size: 8px; padding: 5px 8px; }
+  }
 </style>
 </head>
 <body class="logica">
@@ -236,7 +373,7 @@
     <div class="macete-grid">
       <div class="macete-card hi"><div class="macete-label">Horizontal</div><div class="macete-title">⊢ — numa linha só</div><div class="macete-body">Usado quando o argumento está em uma linha, premissas separadas por vírgula.<br><br><span class="hl">a → b, a ⊢ b</span><br><br>Lê-se: <em>"dados a→b e a, conclui-se b"</em></div></div>
       <div class="macete-card hi"><div class="macete-label">Vertical</div><div class="macete-title">∴ — formato empilhado</div><div class="macete-body">Usado quando as premissas ficam empilhadas com traço separando.<br><br><div class="code-block"><div class="cy">a → b &nbsp; (P1)</div><div class="cy">a &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (P2)</div><hr class="div"><div class="ca">∴ b &nbsp;&nbsp;&nbsp;&nbsp; (Q)</div></div></div></div>
-      <div class="macete-card full"><div class="macete-label">Regra da prova</div><div class="macete-title">Como não confundir</div><div class="macete-body"><table class="mt"><tr><th>Formato</th><th>Símbolo correto</th><th>Exemplo</th></tr><tr><td>Uma linha só</td><td class="vc">⊢</td><td class="mc">a → b, a ⊢ b</td></tr><tr><td>Empilhado vertical</td><td class="vc">∴</td><td class="mc">P1 / P2 / — / ∴ Q</td></tr></table><div class="hint"><strong>Na prova:</strong> responde no mesmo formato que o enunciado apresenta!</div></div></div>
+      <div class="macete-card full"><div class="macete-label">Regra da prova</div><div class="macete-title">Como não confundir</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Formato</th><th>Símbolo correto</th><th>Exemplo</th></tr><tr><td>Uma linha só</td><td class="vc">⊢</td><td class="mc">a → b, a ⊢ b</td></tr><tr><td>Empilhado vertical</td><td class="vc">∴</td><td class="mc">P1 / P2 / — / ∴ Q</td></tr></table></div><div class="hint"><strong>Na prova:</strong> responde no mesmo formato que o enunciado apresenta!</div></div></div>
     </div>
   </div>
 
@@ -249,7 +386,7 @@
       <div class="macete-card"><div class="macete-label">Válido ✅</div><div class="macete-title">Modus Tollens</div><div class="macete-body">P2 é a <strong>negação do consequente</strong> de P1.<br><br><div class="code-block"><div class="cy">a → b &nbsp;&nbsp; (P1)</div><div class="cy">~b &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (P2) ← negação do consequente</div><hr class="div"><div class="cg">∴ ~a &nbsp;&nbsp;&nbsp;&nbsp; (Q) ✅</div></div><div class="hint">Se o efeito não aconteceu, a causa também não aconteceu.</div></div></div>
       <div class="macete-card"><div class="macete-label">Inválido ❌</div><div class="macete-title">Negação do Antecedente</div><div class="macete-body">P2 é a <strong>negação do antecedente</strong> de P1.<br><br><div class="code-block"><div class="cy">a → b &nbsp;&nbsp; (P1)</div><div class="cy">~a &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (P2) ← negação do antecedente</div><hr class="div"><div class="cr">∴ ~b &nbsp;&nbsp;&nbsp;&nbsp; (Q) ❌</div></div></div></div>
       <div class="macete-card"><div class="macete-label">Inválido ❌</div><div class="macete-title">Afirmação do Consequente</div><div class="macete-body">P2 é igual ao <strong>consequente</strong> de P1.<br><br><div class="code-block"><div class="cy">a → b &nbsp;&nbsp; (P1)</div><div class="cy">b &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (P2) ← igual ao consequente</div><hr class="div"><div class="cr">∴ a &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Q) ❌</div></div></div></div>
-      <div class="macete-card full"><div class="macete-label">Macete da prova</div><div class="macete-title">Olha a P2 e pergunta: com o que ela se parece?</div><div class="macete-body"><table class="mt"><tr><th>A P2 é...</th><th>Nome</th><th>Válido?</th></tr><tr><td>Igual ao antecedente de P1</td><td>Modus Ponens</td><td class="vc">✅ Válido</td></tr><tr><td>Negação do consequente de P1</td><td>Modus Tollens</td><td class="vc">✅ Válido</td></tr><tr><td>Negação do antecedente de P1</td><td>Negação do Antecedente</td><td class="ic">❌ Falácia</td></tr><tr><td>Igual ao consequente de P1</td><td>Afirmação do Consequente</td><td class="ic">❌ Falácia</td></tr></table></div></div>
+      <div class="macete-card full"><div class="macete-label">Macete da prova</div><div class="macete-title">Olha a P2 e pergunta: com o que ela se parece?</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>A P2 é...</th><th>Nome</th><th>Válido?</th></tr><tr><td>Igual ao antecedente de P1</td><td>Modus Ponens</td><td class="vc">✅ Válido</td></tr><tr><td>Negação do consequente de P1</td><td>Modus Tollens</td><td class="vc">✅ Válido</td></tr><tr><td>Negação do antecedente de P1</td><td>Negação do Antecedente</td><td class="ic">❌ Falácia</td></tr><tr><td>Igual ao consequente de P1</td><td>Afirmação do Consequente</td><td class="ic">❌ Falácia</td></tr></table></div></div></div>
     </div>
   </div>
 
@@ -258,10 +395,10 @@
     <div class="section-title">Tabela-<span>Verdade</span></div>
     <div class="section-desc">Método sistemático para testar se a conjunção das premissas implica a conclusão.</div>
     <div class="macete-grid">
-      <div class="macete-card full hi"><div class="macete-label">Regra de ouro</div><div class="macete-title">Quando o argumento é inválido?</div><div class="macete-body"><table class="mt"><tr><th>P1∧P2</th><th>Q</th><th>Significa</th></tr><tr><td class="vc">V</td><td class="vc">V</td><td class="mc">✅ Tudo certo nessa linha</td></tr><tr><td class="vc">V</td><td class="ic">F</td><td class="ic">❌ ARGUMENTO INVÁLIDO!</td></tr><tr><td class="ic">F</td><td class="vc">V</td><td class="mc">Não importa</td></tr><tr><td class="ic">F</td><td class="ic">F</td><td class="mc">Não importa</td></tr></table><div class="hint"><strong>Quando P1∧P2 = F, o Q não importa!</strong> Só importa quando as premissas são V ao mesmo tempo.</div></div></div>
+      <div class="macete-card full hi"><div class="macete-label">Regra de ouro</div><div class="macete-title">Quando o argumento é inválido?</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>P1∧P2</th><th>Q</th><th>Significa</th></tr><tr><td class="vc">V</td><td class="vc">V</td><td class="mc">✅ Tudo certo nessa linha</td></tr><tr><td class="vc">V</td><td class="ic">F</td><td class="ic">❌ ARGUMENTO INVÁLIDO!</td></tr><tr><td class="ic">F</td><td class="vc">V</td><td class="mc">Não importa</td></tr><tr><td class="ic">F</td><td class="ic">F</td><td class="mc">Não importa</td></tr></table></div><div class="hint"><strong>Quando P1∧P2 = F, o Q não importa!</strong> Só importa quando as premissas são V ao mesmo tempo.</div></div></div>
       <div class="macete-card"><div class="macete-label">Macete</div><div class="macete-title">P2 e Q são cópias!</div><div class="macete-body"><strong>P2 e Q nunca têm cálculo.</strong> Você só copia o valor da proposição.<br><br>O único que tem cálculo é o <span class="hl">condicional (→)</span>.<br><br><strong>Regra do condicional:</strong><br><span class="hlr">Só é F quando antecedente=V e consequente=F.</span></div></div>
       <div class="macete-card"><div class="macete-label">Macete</div><div class="macete-title">Sempre positivo primeiro!</div><div class="macete-body">Mesmo que o argumento use só ~a, monte a coluna <span class="hl">a positivo</span> primeiro, depois inverta.<br><br><span class="hlg">a positivo → VVFF</span><br><span class="hlr">~a negativo → FFVV</span><br><br><span class="hlg">b positivo → VFVF</span><br><span class="hlr">~b negativo → FVFV</span></div></div>
-      <div class="macete-card full"><div class="macete-label">Padrão por número de proposições</div><div class="macete-title">Fórmula: 2ⁿ linhas</div><div class="macete-body"><table class="mt"><tr><th>Proposições</th><th>Linhas</th><th>1ª col. troca a cada</th><th>2ª col.</th><th>3ª col.</th><th>4ª col.</th></tr><tr><td>2</td><td class="vc">4</td><td>2</td><td>1</td><td>—</td><td>—</td></tr><tr><td>3</td><td class="vc">8</td><td>4</td><td>2</td><td>1</td><td>—</td></tr><tr><td>4</td><td class="vc">16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr><tr><td>5</td><td class="vc">32</td><td>16</td><td>8</td><td>4</td><td>2</td></tr></table><div class="hint"><strong>Quanto mais à direita, mais rápido alterna!</strong> O ~ não conta como proposição separada.</div></div></div>
+      <div class="macete-card full"><div class="macete-label">Padrão por número de proposições</div><div class="macete-title">Fórmula: 2ⁿ linhas</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Proposições</th><th>Linhas</th><th>1ª col. troca a cada</th><th>2ª col.</th><th>3ª col.</th><th>4ª col.</th></tr><tr><td>2</td><td class="vc">4</td><td>2</td><td>1</td><td>—</td><td>—</td></tr><tr><td>3</td><td class="vc">8</td><td>4</td><td>2</td><td>1</td><td>—</td></tr><tr><td>4</td><td class="vc">16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr><tr><td>5</td><td class="vc">32</td><td>16</td><td>8</td><td>4</td><td>2</td></tr></table></div><div class="hint"><strong>Quanto mais à direita, mais rápido alterna!</strong> O ~ não conta como proposição separada.</div></div></div>
     </div>
   </div>
 
@@ -270,8 +407,8 @@
     <div class="section-title">Prova <span>Direta</span></div>
     <div class="section-desc">Encadeia regras de inferência passo a passo até chegar na conclusão.</div>
     <div class="macete-grid">
-      <div class="macete-card"><div class="macete-label">Estrutura</div><div class="macete-title">Como montar</div><div class="macete-body"><table class="mt"><tr><th>Passo</th><th>Proposição</th><th>Justificativa</th></tr><tr><td>1</td><td class="mc">P1</td><td class="mc">Premissa 1</td></tr><tr><td>2</td><td class="mc">P2</td><td class="mc">Premissa 2</td></tr><tr><td>3</td><td class="vc">Q</td><td class="vc">Regra usada (1,2)</td></tr></table><div class="hint"><strong>A justificativa nunca é "Conclusão"!</strong> É sempre a regra — Modus Ponens, Modus Tollens.</div></div></div>
-      <div class="macete-card"><div class="macete-label">Justificativas</div><div class="macete-title">O que escrever</div><div class="macete-body"><table class="mt"><tr><th>O que você fez</th><th>Justificativa</th></tr><tr><td>Copiou premissa</td><td class="mc">Premissa 1/2/3...</td></tr><tr><td>a→b com a → b</td><td class="vc">Modus Ponens (1,2)</td></tr><tr><td>a→b com ~b → ~a</td><td class="vc">Modus Tollens (1,2)</td></tr><tr><td>a e b → a∧b</td><td class="vc">União (1,2)</td></tr></table></div></div>
+      <div class="macete-card"><div class="macete-label">Estrutura</div><div class="macete-title">Como montar</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Passo</th><th>Proposição</th><th>Justificativa</th></tr><tr><td>1</td><td class="mc">P1</td><td class="mc">Premissa 1</td></tr><tr><td>2</td><td class="mc">P2</td><td class="mc">Premissa 2</td></tr><tr><td>3</td><td class="vc">Q</td><td class="vc">Regra usada (1,2)</td></tr></table></div><div class="hint"><strong>A justificativa nunca é "Conclusão"!</strong> É sempre a regra — Modus Ponens, Modus Tollens.</div></div></div>
+      <div class="macete-card"><div class="macete-label">Justificativas</div><div class="macete-title">O que escrever</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>O que você fez</th><th>Justificativa</th></tr><tr><td>Copiou premissa</td><td class="mc">Premissa 1/2/3...</td></tr><tr><td>a→b com a → b</td><td class="vc">Modus Ponens (1,2)</td></tr><tr><td>a→b com ~b → ~a</td><td class="vc">Modus Tollens (1,2)</td></tr><tr><td>a e b → a∧b</td><td class="vc">União (1,2)</td></tr></table></div></div></div>
       <div class="macete-card full"><div class="macete-label">Exemplo com 3 premissas</div><div class="macete-title">t, t → ~q, ~q → ~s ⊢ ~s</div><div class="macete-body"><div class="code-block"><div><span class="cm">Passo 1: </span><span class="cy">t</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 1</span></div><div><span class="cm">Passo 2: </span><span class="cy">t → ~q</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 2</span></div><div><span class="cm">Passo 3: </span><span class="cy">~q → ~s</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 3</span></div><div><span class="cm">Passo 4: </span><span class="cg">~q</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (1,2)</span></div><div><span class="cm">Passo 5: </span><span class="cg">~s</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (3,4)</span></div></div><div class="hint">Com 3 premissas, você <strong>encadeia</strong> os resultados. O resultado do passo 4 vira entrada do passo 5!</div></div></div>
     </div>
   </div>
@@ -282,7 +419,7 @@
     <div class="section-desc">Usada quando a conclusão tem formato condicional (a → b).</div>
     <div class="macete-grid">
       <div class="macete-card hi"><div class="macete-label">Macete principal</div><div class="macete-title">A PP é o antecedente de Q!</div><div class="macete-body">Se a conclusão é <span class="hl">c → ~a</span>:<br><br>PP = <span class="hlg">c</span> (o antecedente)<br>Objetivo = provar <span class="hlg">~a</span> (o consequente)<br><br><div class="hint"><strong>PP não bate com nenhuma premissa?</strong> Impossível — argumento mal formulado.</div></div></div>
-      <div class="macete-card"><div class="macete-label">Macete</div><div class="macete-title">Por onde começo?</div><div class="macete-body">Olha o antecedente de cada premissa e verifica com o que bate:<br><br><table class="mt"><tr><th>Antecedente da premissa</th><th>Usa com</th></tr><tr><td class="vc">Igual à PP</td><td class="mc">Direto com PP</td></tr><tr><td class="vc">Igual a resultado anterior</td><td class="mc">Com esse resultado</td></tr></table></div></div>
+      <div class="macete-card"><div class="macete-label">Macete</div><div class="macete-title">Por onde começo?</div><div class="macete-body">Olha o antecedente de cada premissa e verifica com o que bate:<br><br><div class="mt-wrap"><table class="mt"><tr><th>Antecedente da premissa</th><th>Usa com</th></tr><tr><td class="vc">Igual à PP</td><td class="mc">Direto com PP</td></tr><tr><td class="vc">Igual a resultado anterior</td><td class="mc">Com esse resultado</td></tr></table></div></div></div>
       <div class="macete-card full"><div class="macete-label">Exemplo resolvido</div><div class="macete-title">a → b, c → ~b ⊢ c → ~a</div><div class="macete-body">Q é <span class="hl">c → ~a</span>, então PP = <span class="hlg">c</span>.<br><br><div class="code-block"><div><span class="cm">Passo 1: </span><span class="cy">a → b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 1</span></div><div><span class="cm">Passo 2: </span><span class="cy">c → ~b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 2</span></div><div><span class="cm">Passo 3: </span><span class="cb">c</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa Provisória (PP)</span></div><hr class="div"><div><span class="cm">Passo 4: </span><span class="cg">~b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (2, PP)</span></div><div><span class="cm">Passo 5: </span><span class="cg">~a</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Tollens (1, ~b)</span></div><hr class="div"><div><span class="cm">Conclusão: </span><span class="ca">c → ~a</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prova Condicional ✅</span></div></div></div></div>
     </div>
   </div>
@@ -292,8 +429,8 @@
     <div class="section-title">Redução ao <span>Absurdo</span></div>
     <div class="section-desc">Usada quando a conclusão não tem formato condicional. Nega a conclusão e infere até achar uma contradição.</div>
     <div class="macete-grid">
-      <div class="macete-card hi"><div class="macete-label">Macete principal</div><div class="macete-title">A PP é a negação de Q!</div><div class="macete-body"><table class="mt"><tr><th>Conclusão Q</th><th>PP</th></tr><tr><td>~(a ∧ c)</td><td class="vc">a ∧ c</td></tr><tr><td>~(a ∧ ~c)</td><td class="vc">a ∧ ~c</td></tr></table><div class="hint">Quando Q é ~(algo), a PP é esse <strong>algo</strong> sem a negação!</div></div></div>
-      <div class="macete-card"><div class="macete-label">Macete crucial</div><div class="macete-title">MP vs MT — não confunda!</div><div class="macete-body"><table class="mt"><tr><th>Situação</th><th>Regra</th><th>Resultado</th></tr><tr><td>Tenho a→b e <span class="vc">a</span></td><td class="vc">Modus Ponens</td><td class="vc">Conclui b</td></tr><tr><td>Tenho a→b e <span class="ic">~b</span></td><td class="vc">Modus Tollens</td><td class="vc">Conclui ~a</td></tr></table></div></div>
+      <div class="macete-card hi"><div class="macete-label">Macete principal</div><div class="macete-title">A PP é a negação de Q!</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Conclusão Q</th><th>PP</th></tr><tr><td>~(a ∧ c)</td><td class="vc">a ∧ c</td></tr><tr><td>~(a ∧ ~c)</td><td class="vc">a ∧ ~c</td></tr></table></div><div class="hint">Quando Q é ~(algo), a PP é esse <strong>algo</strong> sem a negação!</div></div></div>
+      <div class="macete-card"><div class="macete-label">Macete crucial</div><div class="macete-title">MP vs MT — não confunda!</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Situação</th><th>Regra</th><th>Resultado</th></tr><tr><td>Tenho a→b e <span class="vc">a</span></td><td class="vc">Modus Ponens</td><td class="vc">Conclui b</td></tr><tr><td>Tenho a→b e <span class="ic">~b</span></td><td class="vc">Modus Tollens</td><td class="vc">Conclui ~a</td></tr></table></div></div></div>
       <div class="macete-card full"><div class="macete-label">Exemplo resolvido</div><div class="macete-title">a → ~b, c → b ⊢ ~(a ∧ c)</div><div class="macete-body"><div class="code-block"><div><span class="cm">Passo 1: </span><span class="cy">a → ~b</span><span class="cm"> &nbsp; Premissa 1</span></div><div><span class="cm">Passo 2: </span><span class="cy">c → b</span><span class="cm"> &nbsp;&nbsp; Premissa 2</span></div><div><span class="cm">Passo 3: </span><span class="cb">a ∧ c</span><span class="cm"> &nbsp;&nbsp; PP (negação de ~(a∧c))</span></div><hr class="div"><div><span class="cm">Passo 4: </span><span class="cg">a</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Simplificação (PP)</span></div><div><span class="cm">Passo 5: </span><span class="cg">c</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Simplificação (PP)</span></div><div><span class="cm">Passo 6: </span><span class="cg">~b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (1, a)</span></div><div><span class="cm">Passo 7: </span><span class="cg">b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (2, c)</span></div><div><span class="cr">Passo 8: b ∧ ~b &nbsp; CONTRADIÇÃO! ❌</span></div><hr class="div"><div><span class="ca">∴ ~(a ∧ c) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Redução ao Absurdo ✅</span></div></div></div></div>
     </div>
   </div>
@@ -303,8 +440,8 @@
     <div class="section-title"><span>Fluxograma</span></div>
     <div class="section-desc">Representação visual das inferências em retângulos com setas.</div>
     <div class="macete-grid">
-      <div class="macete-card hi"><div class="macete-label">Macete principal</div><div class="macete-title">Os 3 elementos</div><div class="macete-body"><table class="mt"><tr><th>Elemento</th><th>Papel</th></tr><tr><td class="vc">Premissa simples</td><td class="mc">Ponto de partida</td></tr><tr><td class="vc">Premissas condicionais</td><td class="mc">O caminho</td></tr><tr><td class="vc">Conclusão = V</td><td class="mc">O destino</td></tr></table><div class="hint"><strong>Sempre identifica a premissa simples primeiro!</strong></div></div></div>
-      <div class="macete-card"><div class="macete-label">Macete</div><div class="macete-title">Condicional com consequente F</div><div class="macete-body"><table class="mt"><tr><th>a</th><th>b</th><th>a → b</th></tr><tr><td>V</td><td>F</td><td class="ic">F</td></tr><tr><td>F</td><td>F</td><td class="vc">V</td></tr></table><div class="hint">Se <span class="hl">a → F = V</span>, então obrigatoriamente <span class="hlg">a = F</span>!</div></div></div>
+      <div class="macete-card hi"><div class="macete-label">Macete principal</div><div class="macete-title">Os 3 elementos</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Elemento</th><th>Papel</th></tr><tr><td class="vc">Premissa simples</td><td class="mc">Ponto de partida</td></tr><tr><td class="vc">Premissas condicionais</td><td class="mc">O caminho</td></tr><tr><td class="vc">Conclusão = V</td><td class="mc">O destino</td></tr></table></div><div class="hint"><strong>Sempre identifica a premissa simples primeiro!</strong></div></div></div>
+      <div class="macete-card"><div class="macete-label">Macete</div><div class="macete-title">Condicional com consequente F</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>a</th><th>b</th><th>a → b</th></tr><tr><td>V</td><td>F</td><td class="ic">F</td></tr><tr><td>F</td><td>F</td><td class="vc">V</td></tr></table></div><div class="hint">Se <span class="hl">a → F = V</span>, então obrigatoriamente <span class="hlg">a = F</span>!</div></div></div>
       <div class="macete-card full"><div class="macete-label">Exemplo resolvido</div><div class="macete-title">a → b, ~b ⊢ ~a</div><div class="macete-body">Premissa simples = <span class="hl">~b</span>. Começa por ela.<br><br><div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:12px;"><div style="display:flex;align-items:center;gap:12px;"><div class="flux-box start">a → b = V</div><div style="color:var(--muted);font-size:20px;">←</div><div class="flux-box start">~b = V</div></div><div style="padding-left:10px;color:var(--muted);font-size:20px;line-height:1;">↓</div><div class="flux-box">~b = V → b = F</div><div style="padding-left:10px;color:var(--muted);font-size:20px;line-height:1;">↓</div><div class="flux-box">a → F = V</div><div style="padding-left:10px;color:var(--muted);font-size:20px;line-height:1;">↓</div><div class="flux-box">a = F (único jeito de a→F=V)</div><div style="padding-left:10px;color:var(--muted);font-size:20px;line-height:1;">↓</div><div class="flux-box end">~a = V ✅ Conclusão verdadeira!</div></div></div></div>
     </div>
   </div>
@@ -373,14 +510,14 @@
         <div class="macete-body">
           O sistema usa o disco como extensão da RAM (swap). Como o disco é milhares de vezes mais lento que a RAM, o desempenho despenca drasticamente.<br><br>
           <span class="resp-badge correct">✓ Resposta: B) Thrashing</span><br><br>
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Conceito</th><th>O que é</th></tr>
             <tr><td class="hlb">Thrashing</td><td class="mc">SO gasta mais tempo paginando do que executando processos</td></tr>
             <tr><td>Page Fault</td><td class="mc">Página solicitada não está na RAM — precisa buscar no disco</td></tr>
             <tr><td>Cache Miss</td><td class="mc">Dado não encontrado no cache do processador</td></tr>
             <tr><td>Deadlock</td><td class="mc">Dois processos se bloqueiam mutuamente esperando recursos</td></tr>
             <tr><td>Fragmentação</td><td class="mc">Espaços livres espalhados que não formam bloco contíguo</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>Macete:</strong> CPU ociosa + disco 100% = sempre Thrashing. O SO está ocupado demais paginando para executar processos!</div>
         </div>
       </div>
@@ -390,13 +527,13 @@
         <div class="macete-title">Pen drive 4GB para Windows, Linux e macOS sem drivers extras</div>
         <div class="macete-body">
           <span class="resp-badge correct">✓ Resposta: D) FAT32</span><br><br>
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Sistema</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Tamanho máx. arquivo</th></tr>
             <tr><td class="hlb">FAT32</td><td class="vc">✓</td><td class="vc">✓</td><td class="vc">✓</td><td class="mc">4 GB</td></tr>
             <tr><td>NTFS</td><td class="vc">✓</td><td class="mc">leitura</td><td class="ic">escrita limitada</td><td class="mc">Sem limite prático</td></tr>
             <tr><td>ext4</td><td class="ic">✗</td><td class="vc">✓</td><td class="ic">✗</td><td class="mc">16 TB</td></tr>
             <tr><td>APFS/HFS+</td><td class="ic">✗</td><td class="ic">✗</td><td class="vc">✓</td><td class="mc">Apple only</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>Macete:</strong> FAT32 = o único universal. A limitação de 4GB por arquivo não é problema pois o pen drive É de 4GB.</div>
         </div>
       </div>
@@ -406,14 +543,14 @@
         <div class="macete-title">RAM em 94%, swap intensivo — qual ação traz maior impacto?</div>
         <div class="macete-body">
           <span class="resp-badge correct">✓ Resposta: C) Adicionar mais memória RAM</span><br><br>
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Ação</th><th>Impacto</th><th>Por quê</th></tr>
             <tr><td class="hlg">Adicionar RAM</td><td class="vc">🔥 Altíssimo</td><td class="mc">Elimina o swap — RAM é 833x mais rápida que SSD NVMe</td></tr>
             <tr><td>Trocar HD por SSD NVMe</td><td class="mc">Alto</td><td class="mc">Melhora o swap, mas não elimina o problema</td></tr>
             <tr><td>Aumentar clock CPU</td><td class="ic">Baixo</td><td class="mc">CPU não é o gargalo (está ociosa)</td></tr>
             <tr><td>Trocar SO para Linux</td><td class="ic">Baixo</td><td class="mc">Não resolve falta de RAM</td></tr>
             <tr><td>Aumentar quantum Round Robin</td><td class="ic">Nenhum</td><td class="mc">Não tem relação com o problema</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>Macete:</strong> O problema é RAM insuficiente → solução direta é mais RAM. RAM (60ns) vs SSD NVMe (50µs) vs HD (10ms).</div>
         </div>
       </div>
@@ -432,14 +569,14 @@
         <div class="macete-title">Processo aguardando evento externo — em qual estado está?</div>
         <div class="macete-body">
           <span class="resp-badge correct">✓ Resposta: D) BLOQUEADO</span><br><br>
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Estado</th><th>Descrição</th></tr>
             <tr><td>NOVO</td><td class="mc">Processo acabou de ser criado</td></tr>
             <tr><td>PRONTO</td><td class="mc">Pronto para executar, aguardando a CPU</td></tr>
             <tr><td>EXECUTANDO</td><td class="mc">Está usando a CPU agora</td></tr>
             <tr><td class="hlr">BLOQUEADO</td><td class="mc">Aguardando evento externo (I/O, timer, sinal)</td></tr>
             <tr><td>ENCERRADO</td><td class="mc">Terminou a execução</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>Macete:</strong> BLOQUEADO = processo está esperando algo que não é a CPU. Quando o evento chega, ele volta para PRONTO.</div>
         </div>
       </div>
@@ -450,12 +587,12 @@
         <div class="macete-body">
           <span class="resp-badge correct">✓ Resposta: C) Race Condition — resolvido com mutex</span><br><br>
           <div class="hint" style="margin-bottom:12px;"><strong>O que aconteceu:</strong> A leu R$1.500 → B leu R$1.500 → A calculou R$1.800 → B calculou R$1.300 → B salvou R$1.300 → A sobrescreveu com R$1.800. O depósito de R$300 se perdeu!</div>
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Problema</th><th>O que é</th><th>Solução</th></tr>
             <tr><td class="hlr">Race Condition</td><td class="mc">Resultado depende da ordem de execução dos processos</td><td class="hlg">Mutex / Semáforo</td></tr>
             <tr><td>Deadlock</td><td class="mc">Processos se bloqueiam mutuamente esperando recursos</td><td class="mc">Semáforo contável</td></tr>
             <tr><td>Starvation</td><td class="mc">Processo nunca recebe a CPU</td><td class="mc">Round Robin</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>Macete:</strong> Race Condition = corrida pelos dados. Mutex (mutual exclusion) = trava o recurso enquanto um processo usa.</div>
         </div>
       </div>
@@ -465,11 +602,11 @@
         <div class="macete-title">Principal vantagem do Round Robin sobre o FCFS</div>
         <div class="macete-body">
           <span class="resp-badge correct">✓ Resposta: Menor tempo de resposta / Sem efeito comboio</span><br><br>
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Algoritmo</th><th>Como funciona</th><th>Problema</th></tr>
             <tr><td>FCFS</td><td class="mc">Ordem de chegada, sem preempção</td><td class="ic">Efeito comboio — processo longo trava os curtos</td></tr>
             <tr><td class="hlg">Round Robin</td><td class="mc">Quantum fixo por processo, preempção ao fim</td><td class="vc">Tempo de resposta justo para todos</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>Resposta completa:</strong> O Round Robin garante que nenhum processo monopolize a CPU — cada um recebe uma fatia de tempo (quantum) e volta ao final da fila, eliminando o efeito comboio e reduzindo o tempo de resposta médio.</div>
         </div>
       </div>
@@ -489,14 +626,14 @@
         <div class="macete-body">
           <span class="resp-badge correct">✓ Resposta: B) Tem CPI menor e pipeline mais eficiente</span><br><br>
           <div class="hint" style="margin-bottom:12px;"><strong>Fórmula do desempenho:</strong> Tempo = Instruções × CPI × (1/Clock). Clock maior não garante desempenho maior!</div>
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Característica</th><th>M1 (ARM/RISC)</th><th>Intel i9 (x86/CISC)</th></tr>
             <tr><td>Arquitetura</td><td class="hlg">RISC — instruções simples</td><td class="mc">CISC — instruções complexas</td></tr>
             <tr><td>CPI</td><td class="hlg">Menor (mais trabalho por ciclo)</td><td class="mc">Maior</td></tr>
             <tr><td>Pipeline</td><td class="hlg">Mais eficiente</td><td class="mc">Mais complexo</td></tr>
             <tr><td>Consumo</td><td class="hlg">Menos da metade</td><td class="mc">Alto</td></tr>
             <tr><td>Clock</td><td class="mc">3,2 GHz</td><td class="mc">5 GHz</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>Macete:</strong> RISC = poucas instruções simples mas executa muito rápido. CISC = instruções complexas que consomem mais ciclos (CPI maior).</div>
         </div>
       </div>
@@ -514,7 +651,7 @@
         <div class="macete-label">Tabela de conversão — fundamental!</div>
         <div class="macete-title">Como converter simbólico para octal</div>
         <div class="macete-body">
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Simbólico</th><th>Octal</th><th>Significado</th></tr>
             <tr><td class="hlg">rwx</td><td class="hlg">7</td><td class="mc">leitura + escrita + execução</td></tr>
             <tr><td class="hlb">rw-</td><td class="hlb">6</td><td class="mc">leitura + escrita</td></tr>
@@ -524,7 +661,7 @@
             <tr><td>-w-</td><td>2</td><td class="mc">somente escrita</td></tr>
             <tr><td>--x</td><td>1</td><td class="mc">somente execução</td></tr>
             <tr><td class="hlr">---</td><td class="hlr">0</td><td class="mc">nenhuma permissão</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>Regra:</strong> r=4, w=2, x=1. Some os valores. O código octal tem 3 dígitos: [proprietário][grupo][outros]</div>
         </div>
       </div>
@@ -560,12 +697,12 @@
         <div class="macete-title">Octal 644 → notação simbólica (rwx)</div>
         <div class="macete-body">
           <span class="resp-badge correct">✓ Resposta: rw-r--r--</span><br><br>
-          <table class="mt">
+          <div class="mt-wrap"><table class="mt">
             <tr><th>Dígito</th><th>Quem</th><th>Octal</th><th>Simbólico</th><th>Permissões</th></tr>
             <tr><td>1°</td><td>Proprietário</td><td class="hlb">6</td><td class="hlb">rw-</td><td class="mc">Lê e escreve</td></tr>
             <tr><td>2°</td><td>Grupo</td><td>4</td><td>r--</td><td class="mc">Só lê</td></tr>
             <tr><td>3°</td><td>Outros</td><td>4</td><td>r--</td><td class="mc">Só lê</td></tr>
-          </table>
+          </table></div>
           <div class="hint"><strong>644</strong> é a permissão padrão de arquivos normais no Linux. Proprietário lê/escreve, todos os outros só leem.</div>
         </div>
       </div>
