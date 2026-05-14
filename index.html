@@ -7,345 +7,230 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="https://fav.farm/☠️">
 <style>
-  /* ===== TEMA LÓGICA (escuro/roxo) ===== */
   body.logica {
-    --bg: #0d0d0f; --bg2: #131316; --bg3: #1a1a1f;
-    --border: #2a2a32; --accent: #7c6aff; --accent2: #ff6a6a;
-    --green: #4fffb0; --yellow: #ffe14f; --blue: #4fb8ff;
-    --text: #e8e8f0; --muted: #7070a0; --valid: #4fffb0; --invalid: #ff6a6a;
-    background: var(--bg);
+    --bg:#0d0d0f;--bg2:#131316;--bg3:#1a1a1f;--border:#2a2a32;--accent:#7c6aff;--accent2:#ff6a6a;
+    --green:#4fffb0;--yellow:#ffe14f;--blue:#4fb8ff;--text:#e8e8f0;--muted:#7070a0;--valid:#4fffb0;--invalid:#ff6a6a;
+    background:var(--bg);
   }
-
-  /* ===== TEMA COMPUTADORES (claro/neon radical) ===== */
   body.comp {
-    --bg: #f5f0ff; --bg2: #ffffff; --bg3: #ede6ff;
-    --border: #c9b8ff; --accent: #6200ea; --accent2: #ff1744;
-    --green: #00c853; --yellow: #ffd600; --blue: #2979ff;
-    --text: #1a0040; --muted: #6200ea99; --valid: #00c853; --invalid: #ff1744;
-    background: var(--bg);
+    --bg:#f5f0ff;--bg2:#ffffff;--bg3:#ede6ff;--border:#c9b8ff;--accent:#6200ea;--accent2:#ff1744;
+    --green:#00c853;--yellow:#ffd600;--blue:#2979ff;--text:#1a0040;--muted:#6200ea99;--valid:#00c853;--invalid:#ff1744;
+    background:var(--bg);
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; }
-  html { overflow-x: hidden; }
-  body { color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; padding: 0 0 60px; transition: background 0.3s; overflow-x: hidden; word-break: break-word; }
-
-  /* TOP NAV — matérias */
-  .top-nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; background: var(--bg); width: 100%; overflow: hidden; }
-  .top-btn {
-    flex: 1; min-width: 0; padding: 16px 12px; font-family: 'Space Mono', monospace; font-size: 11px;
-    letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer;
-    background: var(--bg2); color: var(--muted); transition: all 0.2s; border-bottom: 3px solid transparent;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  body.psi {
+    --bg:#0f0a04;--bg2:#1a1208;--bg3:#22190c;--border:#3d2c14;--accent:#ff8c42;--accent2:#ffcc02;
+    --green:#52e3a0;--yellow:#ffcc02;--blue:#4fb8ff;--text:#f2e8da;--muted:#9a7a60;--valid:#52e3a0;--invalid:#ff5f5f;
+    background:var(--bg);
   }
-  .top-btn.active { color: var(--accent); border-bottom: 3px solid var(--accent); background: var(--bg); }
-  .top-btn:hover { color: var(--accent); }
-
-  /* COMP TEMA: top-btn radical */
-  body.comp .top-btn { background: #fff; }
-  body.comp .top-btn.active { background: var(--accent); color: #fff; border-bottom: 3px solid var(--accent2); }
-
-  .page { max-width: 920px; margin: 0 auto; padding: 40px 24px; width: 100%; }
-
-  /* HEADER */
-  .header { margin-bottom: 48px; }
-  .header-tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
-  .header h1 { font-size: clamp(28px, 5vw, 50px); font-weight: 800; line-height: 1.1; letter-spacing: -1px; }
-  .header h1 span { color: var(--accent); }
-  body.comp .header h1 span { background: linear-gradient(90deg, #6200ea, #2979ff, #00c853); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .header-sub { margin-top: 14px; color: var(--muted); font-size: 14px; max-width: 560px; line-height: 1.6; }
-  .header-line { margin-top: 32px; height: 2px; background: linear-gradient(90deg, var(--accent) 0%, transparent 70%); }
-  body.comp .header-line { background: linear-gradient(90deg, #6200ea, #2979ff, #00c853, transparent); }
-
-  /* SUB NAV */
-  .nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
-  .nav-btn { font-family: 'Space Mono', monospace; font-size: 11px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg2); color: var(--muted); cursor: pointer; letter-spacing: 1px; transition: all 0.2s; }
-  .nav-btn:hover, .nav-btn.active { border-color: var(--accent); color: var(--accent); background: var(--bg3); }
-  body.comp .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-  body.comp .nav-btn:hover { background: var(--bg3); color: var(--accent); }
-
-  /* SEÇÕES */
-  .materia { display: none; }
-  .materia.active { display: block; }
-  .section { display: none; }
-  .section.active { display: block; }
-
-  .section-title { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
-  .section-title span { color: var(--accent); }
-  .section-desc { color: var(--muted); font-size: 13px; margin-bottom: 24px; line-height: 1.6; }
-
-  /* MACETE GRID */
-  .macete-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-  @media (max-width: 600px) { .macete-grid { grid-template-columns: 1fr; } }
-  .macete-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; transition: border-color 0.2s; }
-  .macete-card:hover { border-color: var(--accent); }
-  .macete-card.full { grid-column: 1 / -1; }
-  .macete-card.hi { border-color: var(--accent); border-width: 1.5px; }
-
-  /* COMP: cards com bordas coloridas vibrantes */
-  body.comp .macete-card { box-shadow: 0 2px 12px rgba(98,0,234,0.07); }
-  body.comp .macete-card.hi { border-color: var(--accent); background: linear-gradient(135deg, #f5f0ff, #ede6ff); }
-
-  .macete-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
-  .macete-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
-  .macete-body { font-size: 13px; color: var(--muted); line-height: 1.8; }
-  .macete-body strong { color: var(--text); }
-
-  /* cores inline */
-  .hl  { color: var(--yellow); font-family: 'Space Mono', monospace; }
-  .hlg { color: var(--valid);  font-family: 'Space Mono', monospace; }
-  .hlr { color: var(--invalid);font-family: 'Space Mono', monospace; }
-  .hlb { color: var(--blue);   font-family: 'Space Mono', monospace; }
-  body.comp .hl  { color: #f57c00; }
-  body.comp .hlg { color: #00c853; }
-  body.comp .hlr { color: #ff1744; }
-  body.comp .hlb { color: #2979ff; }
-
-  /* TABELA */
-  .mt-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
-  .mt { width: 100%; border-collapse: collapse; font-family: 'Space Mono', monospace; font-size: 12px; margin-top: 10px; }
-  .mt th { color: var(--accent); font-size: 10px; letter-spacing: 1px; padding: 6px 10px; border-bottom: 1px solid var(--border); text-align: left; }
-  .mt td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text); font-size: 12px; }
-  .mt tr:last-child td { border-bottom: none; }
-  .vc { color: var(--valid); } .ic { color: var(--invalid); } .mc { color: var(--muted); }
-  body.comp .vc { color: #00c853; } body.comp .ic { color: #ff1744; }
-
-  /* CODE BLOCK */
-  .code-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 2.2; color: var(--text); margin-top: 12px; overflow-x: auto; max-width: 100%; white-space: pre-wrap; word-break: break-all; }
-  .code-block .cy { color: var(--yellow); } .code-block .cg { color: var(--valid); }
-  .code-block .cr { color: var(--invalid); } .code-block .cb { color: var(--blue); }
-  .code-block .ca { color: var(--accent); } .code-block .cm { color: var(--muted); }
-  .code-block .div { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
-  body.comp .code-block .cy { color: #f57c00; } body.comp .code-block .cg { color: #00c853; }
-  body.comp .code-block .cr { color: #ff1744; } body.comp .code-block .cb { color: #2979ff; }
-  body.comp .code-block .ca { color: #6200ea; }
-
-  /* HINT */
-  .hint { background: var(--bg3); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 13px; color: var(--text); line-height: 1.7; margin-top: 12px; }
-  .hint strong { color: var(--accent); }
-  body.comp .hint { background: #f3e8ff; border-left: 3px solid var(--accent); }
-
-  /* LEGEND */
-  .legend { display: flex; gap: 20px; margin-bottom: 24px; flex-wrap: wrap; }
-  .legend-item { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); }
-  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .legend-dot.valid { background: var(--valid); } .legend-dot.invalid { background: var(--invalid); }
-
-  /* EXERCISE CARDS — LÓGICA */
-  .exercise { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 16px; overflow: hidden; transition: border-color 0.2s; animation: fadeIn 0.3s ease both; }
-  .exercise:hover { border-color: var(--accent); }
-  .exercise-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
-  .exercise-header-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .exercise-number { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 2px; background: var(--bg3); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; white-space: nowrap; }
-  .exercise-statement { font-size: 14px; font-weight: 600; line-height: 1.4; }
-  .exercise-body { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 600px) { .exercise-body { grid-template-columns: 1fr; } }
-
-  /* EXERCISE CARDS — COMPUTADORES (radical) */
-  body.comp .exercise { border-radius: 16px; border: 2px solid var(--border); box-shadow: 4px 4px 0 var(--accent); }
-  body.comp .exercise:hover { border-color: var(--accent); box-shadow: 6px 6px 0 var(--accent2); }
-  body.comp .exercise-number { background: var(--accent); color: #fff; border: none; font-weight: 700; }
-
-  .block { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
-  .block-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-  .phrase { font-size: 13px; line-height: 1.8; }
-  .phrase p { margin-bottom: 4px; }
-
-  .symbols { font-family: 'Space Mono', monospace; font-size: 12px; line-height: 2.2; }
-  .symbols .p1 { color: var(--yellow); } .symbols .p2 { color: var(--yellow); }
-  .symbols .sdiv { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
-  .symbols .conc { color: var(--accent); } .symbols .neg { color: var(--invalid); }
-  .symbols .vars { color: var(--muted); font-size: 11px; margin-bottom: 8px; }
-  .symbols .vars span { color: var(--yellow); }
-  body.comp .symbols .p1, body.comp .symbols .p2 { color: #f57c00; }
-  body.comp .symbols .vars span { color: #f57c00; }
-
-  .answer-block { grid-column: 1 / -1; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
-  .answer-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
-  .answer-icon.valid { background: rgba(79,255,176,0.15); color: var(--valid); }
-  .answer-icon.invalid { background: rgba(255,106,106,0.15); color: var(--invalid); }
-  .answer-icon.info { background: rgba(79,184,255,0.15); color: var(--blue); }
-  body.comp .answer-icon.valid { background: #e8f5e9; color: #00c853; }
-  body.comp .answer-icon.invalid { background: #fce4ec; color: #ff1744; }
-  body.comp .answer-icon.info { background: #e8eaf6; color: #2979ff; }
-  .answer-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .answer-name.valid { color: var(--valid); } .answer-name.invalid { color: var(--invalid); } .answer-name.info { color: var(--blue); }
-  body.comp .answer-name.valid { color: #00c853; } body.comp .answer-name.invalid { color: #ff1744; } body.comp .answer-name.info { color: #2979ff; }
-  .answer-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .answer-letter { display: inline-block; background: var(--accent); color: #fff; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 6px; }
-  body.comp .answer-letter { background: var(--accent); }
-
-  .toggle-btn { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 4px; transition: color 0.2s, transform 0.2s; flex-shrink: 0; }
-  .toggle-btn.open { color: var(--accent); transform: rotate(180deg); }
-  .collapsible { display: none; }
-  .collapsible.open { display: block; }
-
-  .flux-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 10px 18px; font-family: 'Space Mono', monospace; font-size: 13px; display: inline-block; margin: 3px 0; }
-  .flux-box.start { border-color: var(--yellow); color: var(--yellow); }
-  .flux-box.end { border-color: var(--valid); color: var(--valid); }
-
-  .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-  .footer-text { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
-  .score { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); background: var(--bg3); border: 1px solid var(--border); padding: 8px 20px; border-radius: 8px; }
-
-  /* COMP: gabarito pill colorido */
-  body.comp .score { background: var(--accent); color: #fff; border: none; }
-
-  /* BADGE de resposta correta */
-  .resp-badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 700; margin-bottom: 8px; }
-  .resp-badge.correct { background: rgba(0,200,83,0.12); color: var(--valid); border: 1px solid var(--valid); }
-  body.comp .resp-badge.correct { background: #e8f5e9; color: #00c853; border-color: #00c853; }
-
-  /* COMP: decoração de fundo */
-  body.comp .page { position: relative; }
-
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* ===== RESPONSIVIDADE ===== */
-
-  /* DESKTOP GRANDE (>1200px) */
-  @media (min-width: 1200px) {
-    .page { max-width: 1080px; padding: 48px 40px; }
-    .macete-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
-    .header h1 { font-size: 52px; }
-    .top-btn { font-size: 13px; padding: 20px 32px; }
-    .nav-btn { font-size: 12px; padding: 10px 18px; }
-    .macete-title { font-size: 16px; }
-    .macete-body { font-size: 14px; }
-    .exercise-statement { font-size: 15px; }
+  body.emp {
+    --bg:#f0fdf4;--bg2:#ffffff;--bg3:#dcfce7;--border:#bbf7d0;--accent:#16a34a;--accent2:#047857;
+    --green:#10b981;--yellow:#f59e0b;--blue:#3b82f6;--text:#064e3b;--muted:#16a34a99;--valid:#10b981;--invalid:#ef4444;
+    background:var(--bg);
   }
-
-  /* DESKTOP MÉDIO (900px–1200px) */
-  @media (min-width: 900px) and (max-width: 1199px) {
-    .page { max-width: 920px; padding: 40px 28px; }
-    .macete-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-  }
-
-  /* TABLET (600px–899px) */
-  @media (min-width: 600px) and (max-width: 899px) {
-    .page { padding: 28px 20px; }
-    .top-btn { font-size: 10px; padding: 14px 12px; letter-spacing: 1px; }
-    .nav { gap: 6px; }
-    .nav-btn { font-size: 10px; padding: 7px 10px; }
-    .macete-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .header h1 { font-size: clamp(24px, 4vw, 36px); }
-    .header { margin-bottom: 32px; }
-    .exercise-body { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .mt { font-size: 11px; }
-    .mt th { font-size: 9px; padding: 5px 8px; }
-    .mt td { padding: 6px 8px; font-size: 11px; }
-    .section-title { font-size: 18px; }
-    .macete-title { font-size: 14px; }
-    .macete-body { font-size: 12px; }
-    .code-block { font-size: 11px; }
-  }
-
-  /* CELULAR (< 600px) */
-  @media (max-width: 599px) {
-    .page { padding: 14px 12px; }
-
-    /* Top nav — duas abas lado a lado com texto menor */
-    .top-nav { flex-direction: row; flex-wrap: nowrap; }
-    .top-btn { font-size: 9px; padding: 12px 6px; letter-spacing: 0.5px; text-align: center; white-space: normal; line-height: 1.3; }
-    .top-btn.active { border-bottom: 3px solid var(--accent); }
-
-    /* Sub nav — scroll horizontal */
-    .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; gap: 6px; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-bottom: 20px; }
-    .nav::-webkit-scrollbar { display: none; }
-    .nav-btn { font-size: 9px; padding: 6px 10px; white-space: nowrap; flex-shrink: 0; letter-spacing: 0.5px; }
-
-    /* Header */
-    .header { margin-bottom: 20px; }
-    .header-tag { font-size: 9px; letter-spacing: 1px; }
-    .header h1 { font-size: 22px; letter-spacing: -0.5px; }
-    .header-sub { font-size: 12px; max-width: 100%; }
-    .header-line { margin-top: 20px; }
-
-    /* Grids — tudo coluna única */
-    .macete-grid { grid-template-columns: 1fr !important; gap: 10px; }
-    .macete-card.full { grid-column: 1 !important; }
-    .exercise-body { grid-template-columns: 1fr !important; gap: 10px; padding: 12px; }
-    .answer-block { grid-column: 1 !important; }
-
-    /* Cards */
-    .macete-card { padding: 14px; border-radius: 10px; }
-    .macete-label { font-size: 9px; }
-    .macete-title { font-size: 13px; margin-bottom: 8px; }
-    .macete-body { font-size: 12px; line-height: 1.7; }
-
-    /* Tabelas com scroll */
-    .mt-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border-radius: 8px; }
-    .mt { font-size: 11px; min-width: 360px; }
-    .mt th { font-size: 9px; padding: 5px 8px; }
-    .mt td { padding: 6px 8px; font-size: 11px; }
-
-    /* Code block */
-    .code-block { font-size: 10px; line-height: 1.9; padding: 10px 12px; word-break: break-word; white-space: pre-wrap; }
-
-    /* Exercise cards */
-    .exercise { border-radius: 10px; margin-bottom: 10px; }
-    .exercise-header { padding: 12px 14px; }
-    .exercise-header-left { gap: 8px; }
-    .exercise-number { font-size: 9px; padding: 3px 7px; }
-    .exercise-statement { font-size: 12px; }
-
-    /* Blocks */
-    .block { padding: 12px; border-radius: 8px; }
-    .block-label { font-size: 9px; margin-bottom: 8px; }
-    .phrase { font-size: 12px; line-height: 1.7; }
-    .answer-block { padding: 12px; gap: 10px; flex-direction: row; align-items: flex-start; }
-    .answer-icon { width: 26px; height: 26px; font-size: 12px; flex-shrink: 0; }
-    .answer-name { font-size: 11px; }
-    .answer-desc { font-size: 11px; line-height: 1.6; }
-    .answer-letter { font-size: 9px; padding: 2px 7px; margin-bottom: 4px; }
-
-    /* Símbolos lógica */
-    .symbols { font-size: 10px; line-height: 2; }
-    .symbols .vars { font-size: 10px; }
-
-    /* Hint */
-    .hint { font-size: 11px; padding: 10px 12px; }
-
-    /* Footer */
-    .footer { flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 24px; padding-top: 20px; }
-    .footer-text { font-size: 9px; }
-    .score { font-size: 11px; padding: 6px 12px; }
-
-    /* Section */
-    .section-title { font-size: 16px; }
-    .section-desc { font-size: 11px; margin-bottom: 16px; }
-
-    /* Resp badge */
-    .resp-badge { font-size: 10px; padding: 3px 10px; }
-
-    /* Comp tema no mobile */
-    body.comp .exercise { box-shadow: 2px 2px 0 var(--accent); }
-    body.comp .exercise:hover { box-shadow: 3px 3px 0 var(--accent2); }
-  }
-
-  /* CELULAR PEQUENO (<380px) */
-  @media (max-width: 379px) {
-    .page { padding: 10px 10px; }
-    .header h1 { font-size: 18px; }
-    .top-btn { font-size: 8px; padding: 10px 4px; }
-    .macete-card { padding: 10px; }
-    .exercise-header { padding: 10px 12px; }
-    .code-block { font-size: 9px; }
-    .symbols { font-size: 9px; }
-    .nav-btn { font-size: 8px; padding: 5px 8px; }
-  }
+  *{margin:0;padding:0;box-sizing:border-box;max-width:100%;}
+  html{overflow-x:hidden;}
+  body{color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding:0 0 60px;transition:background 0.3s;overflow-x:hidden;word-break:break-word;}
+  .top-nav{display:flex;gap:0;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;background:var(--bg);width:100%;overflow:hidden;}
+  .top-btn{flex:1;min-width:0;padding:16px 12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;border:none;cursor:pointer;background:var(--bg2);color:var(--muted);transition:all 0.2s;border-bottom:3px solid transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .top-btn.active{color:var(--accent);border-bottom:3px solid var(--accent);background:var(--bg);}
+  .top-btn:hover{color:var(--accent);}
+  body.comp .top-btn, body.emp .top-btn{background:#fff;}
+  body.comp .top-btn.active{background:var(--accent);color:#fff;border-bottom:3px solid var(--accent2);}
+  body.emp .top-btn.active{background:var(--accent);color:#fff;border-bottom:3px solid var(--accent2);}
+  body.psi .top-btn{background:var(--bg2);}
+  body.psi .top-btn.active{color:var(--accent);border-bottom:3px solid var(--accent);background:var(--bg);}
+  .page{max-width:920px;margin:0 auto;padding:40px 24px;width:100%;}
+  .header{margin-bottom:48px;}
+  .header-tag{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+  .header h1{font-size:clamp(28px,5vw,50px);font-weight:800;line-height:1.1;letter-spacing:-1px;}
+  .header h1 span{color:var(--accent);}
+  body.comp .header h1 span{background:linear-gradient(90deg,#6200ea,#2979ff,#00c853);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  body.psi .header h1 span{background:linear-gradient(90deg,#ff8c42,#ffcc02);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  body.emp .header h1 span{background:linear-gradient(90deg,#16a34a,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .header-sub{margin-top:14px;color:var(--muted);font-size:14px;max-width:560px;line-height:1.6;}
+  .header-line{margin-top:32px;height:2px;background:linear-gradient(90deg,var(--accent) 0%,transparent 70%);}
+  body.comp .header-line{background:linear-gradient(90deg,#6200ea,#2979ff,#00c853,transparent);}
+  body.psi .header-line{background:linear-gradient(90deg,#ff8c42,#ffcc02,transparent);}
+  body.emp .header-line{background:linear-gradient(90deg,#16a34a,#3b82f6,transparent);}
+  .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px;}
+  .nav-btn{font-family:'Space Mono',monospace;font-size:11px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--muted);cursor:pointer;letter-spacing:1px;transition:all 0.2s;}
+  .nav-btn:hover,.nav-btn.active{border-color:var(--accent);color:var(--accent);background:var(--bg3);}
+  body.comp .nav-btn.active, body.emp .nav-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  body.comp .nav-btn:hover, body.emp .nav-btn:hover{background:var(--bg3);color:var(--accent);}
+  body.psi .nav-btn.active{background:var(--bg3);border-color:var(--accent);color:var(--accent);}
+  .materia{display:none;}
+  .materia.active{display:block;}
+  .section{display:none;}
+  .section.active{display:block;}
+  .section-title{font-size:20px;font-weight:800;margin-bottom:6px;}
+  .section-title span{color:var(--accent);}
+  .section-desc{color:var(--muted);font-size:13px;margin-bottom:24px;line-height:1.6;}
+  .macete-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+  @media(max-width:600px){.macete-grid{grid-template-columns:1fr;}}
+  .macete-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;transition:border-color 0.2s;}
+  .macete-card:hover{border-color:var(--accent);}
+  .macete-card.full{grid-column:1 / -1;}
+  .macete-card.hi{border-color:var(--accent);border-width:1.5px;}
+  body.comp .macete-card, body.emp .macete-card{box-shadow:0 2px 12px rgba(98,0,234,0.07);}
+  body.emp .macete-card{box-shadow:0 2px 12px rgba(22,163,74,0.07);}
+  body.comp .macete-card.hi{border-color:var(--accent);background:linear-gradient(135deg,#f5f0ff,#ede6ff);}
+  body.psi .macete-card.hi{border-color:var(--accent);background:linear-gradient(135deg,#1a1208,#22190c);}
+  body.emp .macete-card.hi{border-color:var(--accent);background:linear-gradient(135deg,#f0fdf4,#dcfce7);}
+  .macete-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+  .macete-title{font-size:15px;font-weight:700;margin-bottom:10px;}
+  .macete-body{font-size:13px;color:var(--muted);line-height:1.8;}
+  .macete-body strong{color:var(--text);}
+  .hl{color:var(--yellow);font-family:'Space Mono',monospace;}
+  .hlg{color:var(--valid);font-family:'Space Mono',monospace;}
+  .hlr{color:var(--invalid);font-family:'Space Mono',monospace;}
+  .hlb{color:var(--blue);font-family:'Space Mono',monospace;}
+  body.comp .hl{color:#f57c00;}body.comp .hlg{color:#00c853;}body.comp .hlr{color:#ff1744;}body.comp .hlb{color:#2979ff;}
+  body.psi .hl{color:#ffcc02;}body.psi .hlg{color:#52e3a0;}body.psi .hlr{color:#ff5f5f;}body.psi .hlb{color:#4fb8ff;}
+  body.emp .hl{color:#f59e0b;}body.emp .hlg{color:#10b981;}body.emp .hlr{color:#ef4444;}body.emp .hlb{color:#3b82f6;}
+  .mt-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
+  .mt{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:12px;margin-top:10px;}
+  .mt th{color:var(--accent);font-size:10px;letter-spacing:1px;padding:6px 10px;border-bottom:1px solid var(--border);text-align:left;}
+  .mt td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text);font-size:12px;}
+  .mt tr:last-child td{border-bottom:none;}
+  .vc{color:var(--valid);}.ic{color:var(--invalid);}.mc{color:var(--muted);}
+  body.comp .vc{color:#00c853;}body.comp .ic{color:#ff1744;}
+  body.psi .vc{color:#52e3a0;}body.psi .ic{color:#ff5f5f;}
+  .code-block{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-family:'Space Mono',monospace;font-size:12px;line-height:2.2;color:var(--text);margin-top:12px;overflow-x:auto;max-width:100%;white-space:pre-wrap;word-break:break-all;}
+  .code-block .cy{color:var(--yellow);}.code-block .cg{color:var(--valid);}.code-block .cr{color:var(--invalid);}.code-block .cb{color:var(--blue);}.code-block .ca{color:var(--accent);}.code-block .cm{color:var(--muted);}
+  .code-block .div{border:none;border-top:1px solid var(--border);margin:4px 0;}
+  body.comp .code-block .cy{color:#f57c00;}body.comp .code-block .cg{color:#00c853;}body.comp .code-block .cr{color:#ff1744;}body.comp .code-block .cb{color:#2979ff;}body.comp .code-block .ca{color:#6200ea;}
+  body.psi .code-block .cy{color:#ffcc02;}body.psi .code-block .cg{color:#52e3a0;}body.psi .code-block .cr{color:#ff5f5f;}body.psi .code-block .cb{color:#4fb8ff;}body.psi .code-block .ca{color:#ff8c42;}
+  body.emp .code-block .cy{color:#f59e0b;}body.emp .code-block .cg{color:#10b981;}body.emp .code-block .cr{color:#ef4444;}body.emp .code-block .cb{color:#3b82f6;}body.emp .code-block .ca{color:#16a34a;}
+  .hint{background:var(--bg3);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;color:var(--text);line-height:1.7;margin-top:12px;}
+  .hint strong{color:var(--accent);}
+  body.comp .hint{background:#f3e8ff;border-left:3px solid var(--accent);}
+  body.psi .hint{background:var(--bg3);border-left:3px solid var(--accent);}
+  body.emp .hint{background:#dcfce7;border-left:3px solid var(--accent);}
+  body.psi .hint strong{color:var(--accent);}
+  .legend{display:flex;gap:20px;margin-bottom:24px;flex-wrap:wrap;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);}
+  .legend-dot{width:8px;height:8px;border-radius:50%;}
+  .legend-dot.valid{background:var(--valid);}.legend-dot.invalid{background:var(--invalid);}
+  .exercise{background:var(--bg2);border:1px solid var(--border);border-radius:16px;margin-bottom:16px;overflow:hidden;transition:border-color 0.2s;animation:fadeIn 0.3s ease both;}
+  .exercise:hover{border-color:var(--accent);}
+  .exercise-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;}
+  .exercise-header-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .exercise-number{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;background:var(--bg3);border:1px solid var(--border);padding:4px 10px;border-radius:6px;white-space:nowrap;}
+  .exercise-statement{font-size:14px;font-weight:600;line-height:1.4;}
+  .exercise-body{padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:600px){.exercise-body{grid-template-columns:1fr;}}
+  body.comp .exercise, body.emp .exercise{border-radius:16px;border:2px solid var(--border);box-shadow:4px 4px 0 var(--accent);}
+  body.comp .exercise:hover, body.emp .exercise:hover{border-color:var(--accent);box-shadow:6px 6px 0 var(--accent2);}
+  body.comp .exercise-number, body.emp .exercise-number{background:var(--accent);color:#fff;border:none;font-weight:700;}
+  body.psi .exercise{border:1.5px solid var(--border);}
+  body.psi .exercise:hover{border-color:var(--accent);box-shadow:0 0 18px rgba(255,140,66,0.15);}
+  body.psi .exercise-number{background:var(--bg3);color:var(--accent);border:1px solid var(--accent);}
+  .block{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px;}
+  .block-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
+  .phrase{font-size:13px;line-height:1.8;}
+  .phrase p{margin-bottom:4px;}
+  .symbols{font-family:'Space Mono',monospace;font-size:12px;line-height:2.2;}
+  .symbols .p1{color:var(--yellow);}.symbols .p2{color:var(--yellow);}
+  .symbols .sdiv{border:none;border-top:1px solid var(--border);margin:4px 0;}
+  .symbols .conc{color:var(--accent);}.symbols .neg{color:var(--invalid);}
+  .symbols .vars{color:var(--muted);font-size:11px;margin-bottom:8px;}
+  .symbols .vars span{color:var(--yellow);}
+  body.comp .symbols .p1,body.comp .symbols .p2{color:#f57c00;}
+  body.comp .symbols .vars span{color:#f57c00;}
+  .answer-block{grid-column:1 / -1;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:flex-start;gap:14px;}
+  .answer-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;}
+  .answer-icon.valid{background:rgba(79,255,176,0.15);color:var(--valid);}
+  .answer-icon.invalid{background:rgba(255,106,106,0.15);color:var(--invalid);}
+  .answer-icon.info{background:rgba(79,184,255,0.15);color:var(--blue);}
+  body.comp .answer-icon.valid{background:#e8f5e9;color:#00c853;}
+  body.comp .answer-icon.invalid{background:#fce4ec;color:#ff1744;}
+  body.comp .answer-icon.info{background:#e8eaf6;color:#2979ff;}
+  body.emp .answer-icon.valid{background:#dcfce7;color:#10b981;}
+  body.emp .answer-icon.invalid{background:#fee2e2;color:#ef4444;}
+  body.emp .answer-icon.info{background:#dbeafe;color:#3b82f6;}
+  body.psi .answer-icon.valid{background:rgba(82,227,160,0.12);color:#52e3a0;}
+  body.psi .answer-icon.invalid{background:rgba(255,95,95,0.12);color:#ff5f5f;}
+  body.psi .answer-icon.info{background:rgba(79,184,255,0.12);color:#4fb8ff;}
+  .answer-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .answer-name.valid{color:var(--valid);}.answer-name.invalid{color:var(--invalid);}.answer-name.info{color:var(--blue);}
+  body.comp .answer-name.valid{color:#00c853;}body.comp .answer-name.invalid{color:#ff1744;}body.comp .answer-name.info{color:#2979ff;}
+  body.emp .answer-name.valid{color:#10b981;}body.emp .answer-name.invalid{color:#ef4444;}body.emp .answer-name.info{color:#3b82f6;}
+  body.psi .answer-name.valid{color:#52e3a0;}body.psi .answer-name.invalid{color:#ff5f5f;}body.psi .answer-name.info{color:#4fb8ff;}
+  .answer-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+  .answer-letter{display:inline-block;background:var(--accent);color:#fff;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:6px;}
+  .toggle-btn{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px;transition:color 0.2s,transform 0.2s;flex-shrink:0;}
+  .toggle-btn.open{color:var(--accent);transform:rotate(180deg);}
+  .collapsible{display:none;}
+  .collapsible.open{display:block;}
+  .flux-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 18px;font-family:'Space Mono',monospace;font-size:13px;display:inline-block;margin:3px 0;}
+  .flux-box.start{border-color:var(--yellow);color:var(--yellow);}
+  .flux-box.end{border-color:var(--valid);color:var(--valid);}
+  .footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-text{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;}
+  .score{font-family:'Space Mono',monospace;font-size:13px;color:var(--accent);background:var(--bg3);border:1px solid var(--border);padding:8px 20px;border-radius:8px;}
+  body.comp .score, body.emp .score{background:var(--accent);color:#fff;border:none;}
+  body.psi .score{background:var(--bg3);color:var(--accent);border:1px solid var(--accent);}
+  .resp-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:11px;padding:4px 12px;border-radius:20px;font-weight:700;margin-bottom:8px;}
+  .resp-badge.correct{background:rgba(0,200,83,0.12);color:var(--valid);border:1px solid var(--valid);}
+  body.comp .resp-badge.correct{background:#e8f5e9;color:#00c853;border-color:#00c853;}
+  body.emp .resp-badge.correct{background:#dcfce7;color:#10b981;border-color:#10b981;}
+  body.psi .resp-badge.correct{background:rgba(82,227,160,0.12);color:#52e3a0;border:1px solid #52e3a0;}
+  body.comp .page, body.emp .page{position:relative;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  /* SECI diagram */
+  .seci-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+  .seci-card{border-radius:10px;padding:14px;border:1px solid var(--border);}
+  .seci-card.s{border-color:#ff8c42;background:rgba(255,140,66,0.08);}
+  .seci-card.e{border-color:#ffcc02;background:rgba(255,204,2,0.08);}
+  .seci-card.c{border-color:#4fb8ff;background:rgba(79,184,255,0.08);}
+  .seci-card.i{border-color:#52e3a0;background:rgba(82,227,160,0.08);}
+  .seci-letter{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-bottom:4px;}
+  .seci-card.s .seci-letter{color:#ff8c42;}
+  .seci-card.e .seci-letter{color:#ffcc02;}
+  .seci-card.c .seci-letter{color:#4fb8ff;}
+  .seci-card.i .seci-letter{color:#52e3a0;}
+  .seci-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .seci-arrow{font-family:'Space Mono',monospace;font-size:11px;opacity:0.7;margin-bottom:6px;}
+  .seci-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+  /* CICLO CRM */
+  .ciclo{display:flex;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+  .ciclo-fase{flex:1;padding:14px 12px;text-align:center;}
+  .ciclo-fase.pre{background:rgba(255,140,66,0.12);border-right:1px solid var(--border);}
+  .ciclo-fase.venda{background:rgba(255,204,2,0.12);border-right:1px solid var(--border);}
+  .ciclo-fase.pos{background:rgba(82,227,160,0.12);}
+  .ciclo-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+  .ciclo-fase.pre .ciclo-label{color:#ff8c42;}
+  .ciclo-fase.venda .ciclo-label{color:#ffcc02;}
+  .ciclo-fase.pos .ciclo-label{color:#52e3a0;}
+  .ciclo-title{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .ciclo-body{font-size:11px;color:var(--muted);line-height:1.5;}
+  /* HIERARQUIA */
+  .hier{display:flex;flex-direction:column;gap:6px;margin-top:12px;}
+  .hier-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;border:1px solid var(--border);}
+  .hier-item.d{border-color:#9a7a60;background:rgba(154,122,96,0.1);}
+  .hier-item.i{border-color:#ff8c42;background:rgba(255,140,66,0.1);}
+  .hier-item.c{border-color:#52e3a0;background:rgba(82,227,160,0.1);}
+  .hier-icon{font-size:18px;}
+  .hier-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;}
+  .hier-item.d .hier-label{color:#9a7a60;}
+  .hier-item.i .hier-label{color:#ff8c42;}
+  .hier-item.c .hier-label{color:#52e3a0;}
+  .hier-desc{font-size:12px;color:var(--muted);margin-top:2px;}
+  @media(min-width:1200px){.page{max-width:1080px;padding:48px 40px;}.macete-grid{grid-template-columns:1fr 1fr;gap:18px;}.header h1{font-size:52px;}.top-btn{font-size:13px;padding:20px 32px;}.nav-btn{font-size:12px;padding:10px 18px;}.macete-title{font-size:16px;}.macete-body{font-size:14px;}.exercise-statement{font-size:15px;}}
+  @media(min-width:900px)and(max-width:1199px){.page{max-width:920px;padding:40px 28px;}.macete-grid{grid-template-columns:1fr 1fr;gap:14px;}}
+  @media(min-width:600px)and(max-width:899px){.page{padding:28px 20px;}.top-btn{font-size:10px;padding:14px 12px;letter-spacing:1px;}.nav{gap:6px;}.nav-btn{font-size:10px;padding:7px 10px;}.macete-grid{grid-template-columns:1fr 1fr;gap:12px;}.header h1{font-size:clamp(24px,4vw,36px);}.header{margin-bottom:32px;}.exercise-body{grid-template-columns:1fr 1fr;gap:12px;}.mt{font-size:11px;}.mt th{font-size:9px;padding:5px 8px;}.mt td{padding:6px 8px;font-size:11px;}.section-title{font-size:18px;}.macete-title{font-size:14px;}.macete-body{font-size:12px;}.code-block{font-size:11px;}}
+  @media(max-width:599px){.page{padding:14px 12px;}.top-nav{flex-direction:row;flex-wrap:nowrap;}.top-btn{font-size:9px;padding:12px 6px;letter-spacing:0.5px;text-align:center;white-space:normal;line-height:1.3;}.top-btn.active{border-bottom:3px solid var(--accent);}.nav{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;gap:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-bottom:20px;}.nav::-webkit-scrollbar{display:none;}.nav-btn{font-size:9px;padding:6px 10px;white-space:nowrap;flex-shrink:0;letter-spacing:0.5px;}.header{margin-bottom:20px;}.header-tag{font-size:9px;letter-spacing:1px;}.header h1{font-size:22px;letter-spacing:-0.5px;}.header-sub{font-size:12px;max-width:100%;}.header-line{margin-top:20px;}.macete-grid{grid-template-columns:1fr!important;gap:10px;}.macete-card.full{grid-column:1!important;}.exercise-body{grid-template-columns:1fr!important;gap:10px;padding:12px;}.answer-block{grid-column:1!important;}.macete-card{padding:14px;border-radius:10px;}.macete-label{font-size:9px;}.macete-title{font-size:13px;margin-bottom:8px;}.macete-body{font-size:12px;line-height:1.7;}.mt-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px;border-radius:8px;}.mt{font-size:11px;min-width:360px;}.mt th{font-size:9px;padding:5px 8px;}.mt td{padding:6px 8px;font-size:11px;}.code-block{font-size:10px;line-height:1.9;padding:10px 12px;word-break:break-word;white-space:pre-wrap;}.exercise{border-radius:10px;margin-bottom:10px;}.exercise-header{padding:12px 14px;}.exercise-header-left{gap:8px;}.exercise-number{font-size:9px;padding:3px 7px;}.exercise-statement{font-size:12px;}.block{padding:12px;border-radius:8px;}.block-label{font-size:9px;margin-bottom:8px;}.phrase{font-size:12px;line-height:1.7;}.answer-block{padding:12px;gap:10px;flex-direction:row;align-items:flex-start;}.answer-icon{width:26px;height:26px;font-size:12px;flex-shrink:0;}.answer-name{font-size:11px;}.answer-desc{font-size:11px;line-height:1.6;}.answer-letter{font-size:9px;padding:2px 7px;margin-bottom:4px;}.symbols{font-size:10px;line-height:2;}.symbols .vars{font-size:10px;}.hint{font-size:11px;padding:10px 12px;}.footer{flex-direction:column;align-items:flex-start;gap:8px;margin-top:24px;padding-top:20px;}.footer-text{font-size:9px;}.score{font-size:11px;padding:6px 12px;}.section-title{font-size:16px;}.section-desc{font-size:11px;margin-bottom:16px;}.resp-badge{font-size:10px;padding:3px 10px;}.seci-grid{grid-template-columns:1fr 1fr;}.ciclo{flex-direction:column;}.ciclo-fase.pre,.ciclo-fase.venda{border-right:none;border-bottom:1px solid var(--border);}.hier-desc{font-size:11px;}body.comp .exercise, body.emp .exercise{box-shadow:2px 2px 0 var(--accent);}body.comp .exercise:hover, body.emp .exercise:hover{box-shadow:3px 3px 0 var(--accent2);}}
+  @media(max-width:379px){.page{padding:10px 10px;}.header h1{font-size:18px;}.top-btn{font-size:8px;padding:10px 4px;}.macete-card{padding:10px;}.exercise-header{padding:10px 12px;}.code-block{font-size:9px;}.symbols{font-size:9px;}.nav-btn{font-size:8px;padding:5px 8px;}.seci-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body class="logica">
-
-<!-- TOP NAV -->
 <div class="top-nav">
-  <button class="top-btn active" onclick="switchMateria('logica', this)">🧠 Lógica — Aula 6</button>
-  <button class="top-btn" onclick="switchMateria('comp', this)">💻 Organização de Computadores — NP2</button>
+  <button class="top-btn active" onclick="switchMateria('logica',this)">🧠 Lógica — Aula 6</button>
+  <button class="top-btn" onclick="switchMateria('comp',this)">💻 Computadores — NP2</button>
+  <button class="top-btn" onclick="switchMateria('psi',this)">📊 PSI — ERP · CRM · SIG</button>
+  <button class="top-btn" onclick="switchMateria('emp',this)">💡 Empreendedorismo</button>
 </div>
 
-<!-- ============================================================ -->
-<!-- MATÉRIA: LÓGICA -->
-<!-- ============================================================ -->
 <div class="materia active" id="mat-logica">
 <div class="page">
   <div class="header">
@@ -354,7 +239,6 @@
     <p class="header-sub">Macetes, regras e exercícios resolvidos. Clique nas abas para navegar.</p>
     <div class="header-line"></div>
   </div>
-
   <div class="nav">
     <button class="nav-btn active" onclick="showSection('logica','simbolos',this)">⊢ e ∴</button>
     <button class="nav-btn" onclick="showSection('logica','argumentos',this)">Argumentos</button>
@@ -365,8 +249,6 @@
     <button class="nav-btn" onclick="showSection('logica','fluxograma',this)">Fluxograma</button>
     <button class="nav-btn" onclick="showSection('logica','exercicios',this)">10 Exercícios</button>
   </div>
-
-  <!-- SÍMBOLOS -->
   <div class="section active" id="logica-simbolos">
     <div class="section-title">Símbolos <span>⊢ e ∴</span></div>
     <div class="section-desc">Os dois significam "portanto" — a diferença é só o formato de escrita.</div>
@@ -376,8 +258,6 @@
       <div class="macete-card full"><div class="macete-label">Regra da prova</div><div class="macete-title">Como não confundir</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Formato</th><th>Símbolo correto</th><th>Exemplo</th></tr><tr><td>Uma linha só</td><td class="vc">⊢</td><td class="mc">a → b, a ⊢ b</td></tr><tr><td>Empilhado vertical</td><td class="vc">∴</td><td class="mc">P1 / P2 / — / ∴ Q</td></tr></table></div><div class="hint"><strong>Na prova:</strong> responde no mesmo formato que o enunciado apresenta!</div></div></div>
     </div>
   </div>
-
-  <!-- ARGUMENTOS -->
   <div class="section" id="logica-argumentos">
     <div class="section-title">Argumentos <span>Válidos e Falácias</span></div>
     <div class="section-desc">Um argumento é válido quando a conclusão é necessariamente verdadeira sempre que as premissas forem verdadeiras.</div>
@@ -389,8 +269,6 @@
       <div class="macete-card full"><div class="macete-label">Macete da prova</div><div class="macete-title">Olha a P2 e pergunta: com o que ela se parece?</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>A P2 é...</th><th>Nome</th><th>Válido?</th></tr><tr><td>Igual ao antecedente de P1</td><td>Modus Ponens</td><td class="vc">✅ Válido</td></tr><tr><td>Negação do consequente de P1</td><td>Modus Tollens</td><td class="vc">✅ Válido</td></tr><tr><td>Negação do antecedente de P1</td><td>Negação do Antecedente</td><td class="ic">❌ Falácia</td></tr><tr><td>Igual ao consequente de P1</td><td>Afirmação do Consequente</td><td class="ic">❌ Falácia</td></tr></table></div></div></div>
     </div>
   </div>
-
-  <!-- TABELA VERDADE -->
   <div class="section" id="logica-tabela">
     <div class="section-title">Tabela-<span>Verdade</span></div>
     <div class="section-desc">Método sistemático para testar se a conjunção das premissas implica a conclusão.</div>
@@ -401,8 +279,6 @@
       <div class="macete-card full"><div class="macete-label">Padrão por número de proposições</div><div class="macete-title">Fórmula: 2ⁿ linhas</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Proposições</th><th>Linhas</th><th>1ª col. troca a cada</th><th>2ª col.</th><th>3ª col.</th><th>4ª col.</th></tr><tr><td>2</td><td class="vc">4</td><td>2</td><td>1</td><td>—</td><td>—</td></tr><tr><td>3</td><td class="vc">8</td><td>4</td><td>2</td><td>1</td><td>—</td></tr><tr><td>4</td><td class="vc">16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr><tr><td>5</td><td class="vc">32</td><td>16</td><td>8</td><td>4</td><td>2</td></tr></table></div><div class="hint"><strong>Quanto mais à direita, mais rápido alterna!</strong> O ~ não conta como proposição separada.</div></div></div>
     </div>
   </div>
-
-  <!-- PROVA DIRETA -->
   <div class="section" id="logica-direta">
     <div class="section-title">Prova <span>Direta</span></div>
     <div class="section-desc">Encadeia regras de inferência passo a passo até chegar na conclusão.</div>
@@ -412,8 +288,6 @@
       <div class="macete-card full"><div class="macete-label">Exemplo com 3 premissas</div><div class="macete-title">t, t → ~q, ~q → ~s ⊢ ~s</div><div class="macete-body"><div class="code-block"><div><span class="cm">Passo 1: </span><span class="cy">t</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 1</span></div><div><span class="cm">Passo 2: </span><span class="cy">t → ~q</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 2</span></div><div><span class="cm">Passo 3: </span><span class="cy">~q → ~s</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 3</span></div><div><span class="cm">Passo 4: </span><span class="cg">~q</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (1,2)</span></div><div><span class="cm">Passo 5: </span><span class="cg">~s</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (3,4)</span></div></div><div class="hint">Com 3 premissas, você <strong>encadeia</strong> os resultados. O resultado do passo 4 vira entrada do passo 5!</div></div></div>
     </div>
   </div>
-
-  <!-- PROVA CONDICIONAL -->
   <div class="section" id="logica-condicional">
     <div class="section-title">Prova <span>Condicional</span></div>
     <div class="section-desc">Usada quando a conclusão tem formato condicional (a → b).</div>
@@ -423,8 +297,6 @@
       <div class="macete-card full"><div class="macete-label">Exemplo resolvido</div><div class="macete-title">a → b, c → ~b ⊢ c → ~a</div><div class="macete-body">Q é <span class="hl">c → ~a</span>, então PP = <span class="hlg">c</span>.<br><br><div class="code-block"><div><span class="cm">Passo 1: </span><span class="cy">a → b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 1</span></div><div><span class="cm">Passo 2: </span><span class="cy">c → ~b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa 2</span></div><div><span class="cm">Passo 3: </span><span class="cb">c</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Premissa Provisória (PP)</span></div><hr class="div"><div><span class="cm">Passo 4: </span><span class="cg">~b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (2, PP)</span></div><div><span class="cm">Passo 5: </span><span class="cg">~a</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Tollens (1, ~b)</span></div><hr class="div"><div><span class="cm">Conclusão: </span><span class="ca">c → ~a</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prova Condicional ✅</span></div></div></div></div>
     </div>
   </div>
-
-  <!-- REDUÇÃO AO ABSURDO -->
   <div class="section" id="logica-absurdo">
     <div class="section-title">Redução ao <span>Absurdo</span></div>
     <div class="section-desc">Usada quando a conclusão não tem formato condicional. Nega a conclusão e infere até achar uma contradição.</div>
@@ -434,8 +306,6 @@
       <div class="macete-card full"><div class="macete-label">Exemplo resolvido</div><div class="macete-title">a → ~b, c → b ⊢ ~(a ∧ c)</div><div class="macete-body"><div class="code-block"><div><span class="cm">Passo 1: </span><span class="cy">a → ~b</span><span class="cm"> &nbsp; Premissa 1</span></div><div><span class="cm">Passo 2: </span><span class="cy">c → b</span><span class="cm"> &nbsp;&nbsp; Premissa 2</span></div><div><span class="cm">Passo 3: </span><span class="cb">a ∧ c</span><span class="cm"> &nbsp;&nbsp; PP (negação de ~(a∧c))</span></div><hr class="div"><div><span class="cm">Passo 4: </span><span class="cg">a</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Simplificação (PP)</span></div><div><span class="cm">Passo 5: </span><span class="cg">c</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Simplificação (PP)</span></div><div><span class="cm">Passo 6: </span><span class="cg">~b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (1, a)</span></div><div><span class="cm">Passo 7: </span><span class="cg">b</span><span class="cm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modus Ponens (2, c)</span></div><div><span class="cr">Passo 8: b ∧ ~b &nbsp; CONTRADIÇÃO! ❌</span></div><hr class="div"><div><span class="ca">∴ ~(a ∧ c) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Redução ao Absurdo ✅</span></div></div></div></div>
     </div>
   </div>
-
-  <!-- FLUXOGRAMA -->
   <div class="section" id="logica-fluxograma">
     <div class="section-title"><span>Fluxograma</span></div>
     <div class="section-desc">Representação visual das inferências em retângulos com setas.</div>
@@ -445,42 +315,25 @@
       <div class="macete-card full"><div class="macete-label">Exemplo resolvido</div><div class="macete-title">a → b, ~b ⊢ ~a</div><div class="macete-body">Premissa simples = <span class="hl">~b</span>. Começa por ela.<br><br><div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:12px;"><div style="display:flex;align-items:center;gap:12px;"><div class="flux-box start">a → b = V</div><div style="color:var(--muted);font-size:20px;">←</div><div class="flux-box start">~b = V</div></div><div style="padding-left:10px;color:var(--muted);font-size:20px;line-height:1;">↓</div><div class="flux-box">~b = V → b = F</div><div style="padding-left:10px;color:var(--muted);font-size:20px;line-height:1;">↓</div><div class="flux-box">a → F = V</div><div style="padding-left:10px;color:var(--muted);font-size:20px;line-height:1;">↓</div><div class="flux-box">a = F (único jeito de a→F=V)</div><div style="padding-left:10px;color:var(--muted);font-size:20px;line-height:1;">↓</div><div class="flux-box end">~a = V ✅ Conclusão verdadeira!</div></div></div></div>
     </div>
   </div>
-
-  <!-- 10 EXERCÍCIOS -->
   <div class="section" id="logica-exercicios">
     <div class="section-title">10 <span>Exercícios</span></div>
     <div class="section-desc">Clique em cada exercício para ver a resposta.</div>
     <div class="legend"><div class="legend-item"><div class="legend-dot valid"></div> Argumento válido</div><div class="legend-item"><div class="legend-dot invalid"></div> Falácia (inválido)</div></div>
-
-    <!-- EX 1 a 10 compactos -->
     <div class="exercise"><div class="exercise-header" onclick="toggle('l1')"><div class="exercise-header-left"><span class="exercise-number">EX 01</span><span class="exercise-statement">"Se estou cansado, durmo cedo. Estou cansado. Logo, durmo cedo."</span></div><button class="toggle-btn" id="btnl1">▼</button></div><div class="collapsible" id="l1"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=estou cansado &nbsp;<span>b</span>=durmo cedo</div><div class="p1">a → b (P1)</div><div class="p2">a (P2)</div><hr class="sdiv"><div class="conc">⊢ b (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se estou cansado, durmo cedo.</p><p><strong>P2:</strong> Estou cansado.</p><p><strong>∴</strong> Durmo cedo.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-name valid">Argumento Válido — Modus Ponens</div><div class="answer-desc">P2 é igual ao antecedente da P1. Válido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l2')"><div class="exercise-header-left"><span class="exercise-number">EX 02</span><span class="exercise-statement">"Se chove, levo guarda-chuva. Levei guarda-chuva. Logo, choveu."</span></div><button class="toggle-btn" id="btnl2">▼</button></div><div class="collapsible" id="l2"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=chove &nbsp;<span>b</span>=levo guarda-chuva</div><div class="p1">a → b (P1)</div><div class="p2">b (P2)</div><hr class="sdiv"><div class="conc">⊢ a (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se chove, levo guarda-chuva.</p><p><strong>P2:</strong> Levei guarda-chuva.</p><p><strong>∴</strong> Choveu.</p></div></div><div class="answer-block"><div class="answer-icon invalid">✗</div><div class="answer-text"><div class="answer-name invalid">Falácia — Afirmação do Consequente</div><div class="answer-desc">P2 é igual ao consequente, não ao antecedente. Inválido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l3')"><div class="exercise-header-left"><span class="exercise-number">EX 03</span><span class="exercise-statement">"Se não tenho carro, pego ônibus. Não tenho carro. Logo, pego ônibus."</span></div><button class="toggle-btn" id="btnl3">▼</button></div><div class="collapsible" id="l3"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=tenho carro &nbsp;<span>b</span>=pego ônibus</div><div class="p1"><span class="neg">~</span>a → b (P1)</div><div class="p2"><span class="neg">~</span>a (P2)</div><hr class="sdiv"><div class="conc">⊢ b (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se não tenho carro, pego ônibus.</p><p><strong>P2:</strong> Não tenho carro.</p><p><strong>∴</strong> Pego ônibus.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-name valid">Argumento Válido — Modus Ponens</div><div class="answer-desc">P2 (~a) é igual ao antecedente da P1 (~a). O ~ não muda a regra. Válido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l4')"><div class="exercise-header-left"><span class="exercise-number">EX 04</span><span class="exercise-statement">"Se estudo, passo na prova. Não passei. Logo, não estudei."</span></div><button class="toggle-btn" id="btnl4">▼</button></div><div class="collapsible" id="l4"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=estudo &nbsp;<span>b</span>=passo na prova</div><div class="p1">a → b (P1)</div><div class="p2"><span class="neg">~</span>b (P2)</div><hr class="sdiv"><div class="conc">⊢ <span class="neg">~</span>a (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se estudo, passo na prova.</p><p><strong>P2:</strong> Não passei.</p><p><strong>∴</strong> Não estudei.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-name valid">Argumento Válido — Modus Tollens</div><div class="answer-desc">P2 é a negação do consequente (~b). Conclui a negação do antecedente (~a). Válido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l5')"><div class="exercise-header-left"><span class="exercise-number">EX 05</span><span class="exercise-statement">"Se não durmo bem, fico irritado. Dormi bem. Logo, não fiquei irritado."</span></div><button class="toggle-btn" id="btnl5">▼</button></div><div class="collapsible" id="l5"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=durmo bem &nbsp;<span>b</span>=fico irritado</div><div class="p1"><span class="neg">~</span>a → b (P1)</div><div class="p2">a (P2)</div><hr class="sdiv"><div class="conc">⊢ <span class="neg">~</span>b (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se não durmo bem, fico irritado.</p><p><strong>P2:</strong> Dormi bem.</p><p><strong>∴</strong> Não fiquei irritado.</p></div></div><div class="answer-block"><div class="answer-icon invalid">✗</div><div class="answer-text"><div class="answer-name invalid">Falácia — Negação do Antecedente</div><div class="answer-desc">Antecedente de P1 é ~a, mas P2 é a — oposto. Inválido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l6')"><div class="exercise-header-left"><span class="exercise-number">EX 06</span><span class="exercise-statement">"Se tenho febre, estou doente. Não estou doente. Logo, não tenho febre."</span></div><button class="toggle-btn" id="btnl6">▼</button></div><div class="collapsible" id="l6"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=tenho febre &nbsp;<span>b</span>=estou doente</div><div class="p1">a → b (P1)</div><div class="p2"><span class="neg">~</span>b (P2)</div><hr class="sdiv"><div class="conc">⊢ <span class="neg">~</span>a (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se tenho febre, estou doente.</p><p><strong>P2:</strong> Não estou doente.</p><p><strong>∴</strong> Não tenho febre.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-name valid">Argumento Válido — Modus Tollens</div><div class="answer-desc">P2 é negação do consequente (~b), conclui negação do antecedente (~a). Válido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l7')"><div class="exercise-header-left"><span class="exercise-number">EX 07</span><span class="exercise-statement">"Se o app trava, o celular esquenta. O celular não esquentou. Logo, o app não travou."</span></div><button class="toggle-btn" id="btnl7">▼</button></div><div class="collapsible" id="l7"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=app trava &nbsp;<span>b</span>=celular esquenta</div><div class="p1">a → b (P1)</div><div class="p2"><span class="neg">~</span>b (P2)</div><hr class="sdiv"><div class="conc">⊢ <span class="neg">~</span>a (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se o app trava, o celular esquenta.</p><p><strong>P2:</strong> O celular não esquentou.</p><p><strong>∴</strong> O app não travou.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-name valid">Argumento Válido — Modus Tollens</div><div class="answer-desc">P2 é negação do consequente. Conclui negação do antecedente. Válido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l8')"><div class="exercise-header-left"><span class="exercise-number">EX 08</span><span class="exercise-statement">"Se não pago a conta, fica sem luz. Paguei a conta. Logo, não ficou sem luz."</span></div><button class="toggle-btn" id="btnl8">▼</button></div><div class="collapsible" id="l8"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=pago a conta &nbsp;<span>b</span>=fica sem luz</div><div class="p1"><span class="neg">~</span>a → b (P1)</div><div class="p2">a (P2)</div><hr class="sdiv"><div class="conc">⊢ <span class="neg">~</span>b (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se não pago a conta, fica sem luz.</p><p><strong>P2:</strong> Paguei a conta.</p><p><strong>∴</strong> Não ficou sem luz.</p></div></div><div class="answer-block"><div class="answer-icon invalid">✗</div><div class="answer-text"><div class="answer-name invalid">Falácia — Negação do Antecedente</div><div class="answer-desc">Antecedente de P1 é ~a, P2 é a. Oposto. Inválido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l9')"><div class="exercise-header-left"><span class="exercise-number">EX 09</span><span class="exercise-statement">"Se acordo cedo, chego no horário. Não acordei cedo. Logo, não cheguei no horário."</span></div><button class="toggle-btn" id="btnl9">▼</button></div><div class="collapsible" id="l9"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=acordo cedo &nbsp;<span>b</span>=chego no horário</div><div class="p1">a → b (P1)</div><div class="p2"><span class="neg">~</span>a (P2)</div><hr class="sdiv"><div class="conc">⊢ <span class="neg">~</span>b (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se acordo cedo, chego no horário.</p><p><strong>P2:</strong> Não acordei cedo.</p><p><strong>∴</strong> Não cheguei no horário.</p></div></div><div class="answer-block"><div class="answer-icon invalid">✗</div><div class="answer-text"><div class="answer-name invalid">Falácia — Negação do Antecedente</div><div class="answer-desc">P2 é negação do antecedente de P1. Inválido.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('l10')"><div class="exercise-header-left"><span class="exercise-number">EX 10</span><span class="exercise-statement">"Se tenho internet, consigo trabalhar. Consigo trabalhar. Logo, tenho internet."</span></div><button class="toggle-btn" id="btnl10">▼</button></div><div class="collapsible" id="l10"><div class="exercise-body"><div class="block"><div class="block-label">Em símbolos</div><div class="symbols"><div class="vars"><span>a</span>=tenho internet &nbsp;<span>b</span>=consigo trabalhar</div><div class="p1">a → b (P1)</div><div class="p2">b (P2)</div><hr class="sdiv"><div class="conc">⊢ a (Q)</div></div></div><div class="block"><div class="block-label">Em português</div><div class="phrase"><p><strong>P1:</strong> Se tenho internet, consigo trabalhar.</p><p><strong>P2:</strong> Consigo trabalhar.</p><p><strong>∴</strong> Tenho internet.</p></div></div><div class="answer-block"><div class="answer-icon invalid">✗</div><div class="answer-text"><div class="answer-name invalid">Falácia — Afirmação do Consequente</div><div class="answer-desc">P2 é igual ao consequente da P1. Inválido.</div></div></div></div></div></div>
-
     <div class="footer"><div class="footer-text">LÓGICA — UNIP 2026 · AULA 6</div><div class="score">10/10 ✓ Gabarito</div></div>
   </div>
 </div>
-</div><!-- fim materia logica -->
+</div>
 
-<!-- ============================================================ -->
-<!-- MATÉRIA: COMPUTADORES -->
-<!-- ============================================================ -->
 <div class="materia" id="mat-comp">
 <div class="page">
   <div class="header">
@@ -489,7 +342,6 @@
     <p class="header-sub">Análise completa de cada questão com gabarito, explicação e conceito envolvido.</p>
     <div class="header-line"></div>
   </div>
-
   <div class="nav">
     <button class="nav-btn active" onclick="showSection('comp','so',this)">SO e Memória</button>
     <button class="nav-btn" onclick="showSection('comp','processos',this)">Processos</button>
@@ -497,250 +349,636 @@
     <button class="nav-btn" onclick="showSection('comp','permissoes',this)">Permissões Linux</button>
     <button class="nav-btn" onclick="showSection('comp','todas',this)">Todas as Questões</button>
   </div>
-
-  <!-- SO E MEMÓRIA -->
   <div class="section active" id="comp-so">
     <div class="section-title">SO e <span>Memória</span></div>
     <div class="section-desc">Questões 01, 02 e 07 — fenômenos de memória, sistemas de arquivos e gargalos.</div>
     <div class="macete-grid">
-
-      <div class="macete-card full hi">
-        <div class="macete-label">Questão 01 — 1 ponto</div>
-        <div class="macete-title">CPU em 12%, disco em 98% — qual é o fenômeno?</div>
-        <div class="macete-body">
-          O sistema usa o disco como extensão da RAM (swap). Como o disco é milhares de vezes mais lento que a RAM, o desempenho despenca drasticamente.<br><br>
-          <span class="resp-badge correct">✓ Resposta: B) Thrashing</span><br><br>
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Conceito</th><th>O que é</th></tr>
-            <tr><td class="hlb">Thrashing</td><td class="mc">SO gasta mais tempo paginando do que executando processos</td></tr>
-            <tr><td>Page Fault</td><td class="mc">Página solicitada não está na RAM — precisa buscar no disco</td></tr>
-            <tr><td>Cache Miss</td><td class="mc">Dado não encontrado no cache do processador</td></tr>
-            <tr><td>Deadlock</td><td class="mc">Dois processos se bloqueiam mutuamente esperando recursos</td></tr>
-            <tr><td>Fragmentação</td><td class="mc">Espaços livres espalhados que não formam bloco contíguo</td></tr>
-          </table></div>
-          <div class="hint"><strong>Macete:</strong> CPU ociosa + disco 100% = sempre Thrashing. O SO está ocupado demais paginando para executar processos!</div>
-        </div>
-      </div>
-
-      <div class="macete-card full">
-        <div class="macete-label">Questão 02 — Sistema de arquivos</div>
-        <div class="macete-title">Pen drive 4GB para Windows, Linux e macOS sem drivers extras</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: D) FAT32</span><br><br>
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Sistema</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Tamanho máx. arquivo</th></tr>
-            <tr><td class="hlb">FAT32</td><td class="vc">✓</td><td class="vc">✓</td><td class="vc">✓</td><td class="mc">4 GB</td></tr>
-            <tr><td>NTFS</td><td class="vc">✓</td><td class="mc">leitura</td><td class="ic">escrita limitada</td><td class="mc">Sem limite prático</td></tr>
-            <tr><td>ext4</td><td class="ic">✗</td><td class="vc">✓</td><td class="ic">✗</td><td class="mc">16 TB</td></tr>
-            <tr><td>APFS/HFS+</td><td class="ic">✗</td><td class="ic">✗</td><td class="vc">✓</td><td class="mc">Apple only</td></tr>
-          </table></div>
-          <div class="hint"><strong>Macete:</strong> FAT32 = o único universal. A limitação de 4GB por arquivo não é problema pois o pen drive É de 4GB.</div>
-        </div>
-      </div>
-
-      <div class="macete-card full">
-        <div class="macete-label">Questão 07 — Gargalo de desempenho</div>
-        <div class="macete-title">RAM em 94%, swap intensivo — qual ação traz maior impacto?</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: C) Adicionar mais memória RAM</span><br><br>
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Ação</th><th>Impacto</th><th>Por quê</th></tr>
-            <tr><td class="hlg">Adicionar RAM</td><td class="vc">🔥 Altíssimo</td><td class="mc">Elimina o swap — RAM é 833x mais rápida que SSD NVMe</td></tr>
-            <tr><td>Trocar HD por SSD NVMe</td><td class="mc">Alto</td><td class="mc">Melhora o swap, mas não elimina o problema</td></tr>
-            <tr><td>Aumentar clock CPU</td><td class="ic">Baixo</td><td class="mc">CPU não é o gargalo (está ociosa)</td></tr>
-            <tr><td>Trocar SO para Linux</td><td class="ic">Baixo</td><td class="mc">Não resolve falta de RAM</td></tr>
-            <tr><td>Aumentar quantum Round Robin</td><td class="ic">Nenhum</td><td class="mc">Não tem relação com o problema</td></tr>
-          </table></div>
-          <div class="hint"><strong>Macete:</strong> O problema é RAM insuficiente → solução direta é mais RAM. RAM (60ns) vs SSD NVMe (50µs) vs HD (10ms).</div>
-        </div>
-      </div>
-
+      <div class="macete-card full hi"><div class="macete-label">Questão 01 — 1 ponto</div><div class="macete-title">CPU em 12%, disco em 98% — qual é o fenômeno?</div><div class="macete-body">O sistema usa o disco como extensão da RAM (swap). Como o disco é milhares de vezes mais lento que a RAM, o desempenho despenca drasticamente.<br><br><span class="resp-badge correct">✓ Resposta: B) Thrashing</span><br><br><div class="mt-wrap"><table class="mt"><tr><th>Conceito</th><th>O que é</th></tr><tr><td class="hlb">Thrashing</td><td class="mc">SO gasta mais tempo paginando do que executando processos</td></tr><tr><td>Page Fault</td><td class="mc">Página solicitada não está na RAM — precisa buscar no disco</td></tr><tr><td>Cache Miss</td><td class="mc">Dado não encontrado no cache do processador</td></tr><tr><td>Deadlock</td><td class="mc">Dois processos se bloqueiam mutuamente esperando recursos</td></tr><tr><td>Fragmentação</td><td class="mc">Espaços livres espalhados que não formam bloco contíguo</td></tr></table></div><div class="hint"><strong>Macete:</strong> CPU ociosa + disco 100% = sempre Thrashing. O SO está ocupado demais paginando para executar processos!</div></div></div>
+      <div class="macete-card full"><div class="macete-label">Questão 02 — Sistema de arquivos</div><div class="macete-title">Pen drive 4GB para Windows, Linux e macOS sem drivers extras</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: D) FAT32</span><br><br><div class="mt-wrap"><table class="mt"><tr><th>Sistema</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Tamanho máx. arquivo</th></tr><tr><td class="hlb">FAT32</td><td class="vc">✓</td><td class="vc">✓</td><td class="vc">✓</td><td class="mc">4 GB</td></tr><tr><td>NTFS</td><td class="vc">✓</td><td class="mc">leitura</td><td class="ic">escrita limitada</td><td class="mc">Sem limite prático</td></tr><tr><td>ext4</td><td class="ic">✗</td><td class="vc">✓</td><td class="ic">✗</td><td class="mc">16 TB</td></tr><tr><td>APFS/HFS+</td><td class="ic">✗</td><td class="ic">✗</td><td class="vc">✓</td><td class="mc">Apple only</td></tr></table></div><div class="hint"><strong>Macete:</strong> FAT32 = o único universal. A limitação de 4GB por arquivo não é problema pois o pen drive É de 4GB.</div></div></div>
+      <div class="macete-card full"><div class="macete-label">Questão 07 — Gargalo de desempenho</div><div class="macete-title">RAM em 94%, swap intensivo — qual ação traz maior impacto?</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: C) Adicionar mais memória RAM</span><br><br><div class="mt-wrap"><table class="mt"><tr><th>Ação</th><th>Impacto</th><th>Por quê</th></tr><tr><td class="hlg">Adicionar RAM</td><td class="vc">🔥 Altíssimo</td><td class="mc">Elimina o swap — RAM é 833x mais rápida que SSD NVMe</td></tr><tr><td>Trocar HD por SSD NVMe</td><td class="mc">Alto</td><td class="mc">Melhora o swap, mas não elimina o problema</td></tr><tr><td>Aumentar clock CPU</td><td class="ic">Baixo</td><td class="mc">CPU não é o gargalo (está ociosa)</td></tr><tr><td>Trocar SO para Linux</td><td class="ic">Baixo</td><td class="mc">Não resolve falta de RAM</td></tr><tr><td>Aumentar quantum Round Robin</td><td class="ic">Nenhum</td><td class="mc">Não tem relação com o problema</td></tr></table></div><div class="hint"><strong>Macete:</strong> O problema é RAM insuficiente → solução direta é mais RAM. RAM (60ns) vs SSD NVMe (50µs) vs HD (10ms).</div></div></div>
     </div>
   </div>
-
-  <!-- PROCESSOS -->
   <div class="section" id="comp-processos">
     <div class="section-title"><span>Processos</span> e Sincronização</div>
     <div class="section-desc">Questões 03, 04 e 10 — estados de processo, Race Condition e escalonamento.</div>
     <div class="macete-grid">
-
-      <div class="macete-card full hi">
-        <div class="macete-label">Questão 03 — Estados de processo</div>
-        <div class="macete-title">Processo aguardando evento externo — em qual estado está?</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: D) BLOQUEADO</span><br><br>
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Estado</th><th>Descrição</th></tr>
-            <tr><td>NOVO</td><td class="mc">Processo acabou de ser criado</td></tr>
-            <tr><td>PRONTO</td><td class="mc">Pronto para executar, aguardando a CPU</td></tr>
-            <tr><td>EXECUTANDO</td><td class="mc">Está usando a CPU agora</td></tr>
-            <tr><td class="hlr">BLOQUEADO</td><td class="mc">Aguardando evento externo (I/O, timer, sinal)</td></tr>
-            <tr><td>ENCERRADO</td><td class="mc">Terminou a execução</td></tr>
-          </table></div>
-          <div class="hint"><strong>Macete:</strong> BLOQUEADO = processo está esperando algo que não é a CPU. Quando o evento chega, ele volta para PRONTO.</div>
-        </div>
-      </div>
-
-      <div class="macete-card full">
-        <div class="macete-label">Questão 04 — Concorrência</div>
-        <div class="macete-title">Dois processos modificam a mesma conta sem sincronização</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: C) Race Condition — resolvido com mutex</span><br><br>
-          <div class="hint" style="margin-bottom:12px;"><strong>O que aconteceu:</strong> A leu R$1.500 → B leu R$1.500 → A calculou R$1.800 → B calculou R$1.300 → B salvou R$1.300 → A sobrescreveu com R$1.800. O depósito de R$300 se perdeu!</div>
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Problema</th><th>O que é</th><th>Solução</th></tr>
-            <tr><td class="hlr">Race Condition</td><td class="mc">Resultado depende da ordem de execução dos processos</td><td class="hlg">Mutex / Semáforo</td></tr>
-            <tr><td>Deadlock</td><td class="mc">Processos se bloqueiam mutuamente esperando recursos</td><td class="mc">Semáforo contável</td></tr>
-            <tr><td>Starvation</td><td class="mc">Processo nunca recebe a CPU</td><td class="mc">Round Robin</td></tr>
-          </table></div>
-          <div class="hint"><strong>Macete:</strong> Race Condition = corrida pelos dados. Mutex (mutual exclusion) = trava o recurso enquanto um processo usa.</div>
-        </div>
-      </div>
-
-      <div class="macete-card full">
-        <div class="macete-label">Questão 10 — Escalonamento</div>
-        <div class="macete-title">Principal vantagem do Round Robin sobre o FCFS</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: Menor tempo de resposta / Sem efeito comboio</span><br><br>
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Algoritmo</th><th>Como funciona</th><th>Problema</th></tr>
-            <tr><td>FCFS</td><td class="mc">Ordem de chegada, sem preempção</td><td class="ic">Efeito comboio — processo longo trava os curtos</td></tr>
-            <tr><td class="hlg">Round Robin</td><td class="mc">Quantum fixo por processo, preempção ao fim</td><td class="vc">Tempo de resposta justo para todos</td></tr>
-          </table></div>
-          <div class="hint"><strong>Resposta completa:</strong> O Round Robin garante que nenhum processo monopolize a CPU — cada um recebe uma fatia de tempo (quantum) e volta ao final da fila, eliminando o efeito comboio e reduzindo o tempo de resposta médio.</div>
-        </div>
-      </div>
-
+      <div class="macete-card full hi"><div class="macete-label">Questão 03 — Estados de processo</div><div class="macete-title">Processo aguardando evento externo — em qual estado está?</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: D) BLOQUEADO</span><br><br><div class="mt-wrap"><table class="mt"><tr><th>Estado</th><th>Descrição</th></tr><tr><td>NOVO</td><td class="mc">Processo acabou de ser criado</td></tr><tr><td>PRONTO</td><td class="mc">Pronto para executar, aguardando a CPU</td></tr><tr><td>EXECUTANDO</td><td class="mc">Está usando a CPU agora</td></tr><tr><td class="hlr">BLOQUEADO</td><td class="mc">Aguardando evento externo (I/O, timer, sinal)</td></tr><tr><td>ENCERRADO</td><td class="mc">Terminou a execução</td></tr></table></div><div class="hint"><strong>Macete:</strong> BLOQUEADO = processo está esperando algo que não é a CPU. Quando o evento chega, ele volta para PRONTO.</div></div></div>
+      <div class="macete-card full"><div class="macete-label">Questão 04 — Concorrência</div><div class="macete-title">Dois processos modificam a mesma conta sem sincronização</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: C) Race Condition — resolvido com mutex</span><br><br><div class="hint" style="margin-bottom:12px;"><strong>O que aconteceu:</strong> A leu R$1.500 → B leu R$1.500 → A calculou R$1.800 → B calculou R$1.300 → B salvou R$1.300 → A sobrescreveu com R$1.800. O depósito de R$300 se perdeu!</div><div class="mt-wrap"><table class="mt"><tr><th>Problema</th><th>O que é</th><th>Solução</th></tr><tr><td class="hlr">Race Condition</td><td class="mc">Resultado depende da ordem de execução dos processos</td><td class="hlg">Mutex / Semáforo</td></tr><tr><td>Deadlock</td><td class="mc">Processos se bloqueiam mutuamente esperando recursos</td><td class="mc">Semáforo contável</td></tr><tr><td>Starvation</td><td class="mc">Processo nunca recebe a CPU</td><td class="mc">Round Robin</td></tr></table></div><div class="hint"><strong>Macete:</strong> Race Condition = corrida pelos dados. Mutex (mutual exclusion) = trava o recurso enquanto um processo usa.</div></div></div>
+      <div class="macete-card full"><div class="macete-label">Questão 10 — Escalonamento</div><div class="macete-title">Principal vantagem do Round Robin sobre o FCFS</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: Menor tempo de resposta / Sem efeito comboio</span><br><br><div class="mt-wrap"><table class="mt"><tr><th>Algoritmo</th><th>Como funciona</th><th>Problema</th></tr><tr><td>FCFS</td><td class="mc">Ordem de chegada, sem preempção</td><td class="ic">Efeito comboio — processo longo trava os curtos</td></tr><tr><td class="hlg">Round Robin</td><td class="mc">Quantum fixo por processo, preempção ao fim</td><td class="vc">Tempo de resposta justo para todos</td></tr></table></div><div class="hint"><strong>Resposta completa:</strong> O Round Robin garante que nenhum processo monopolize a CPU — cada um recebe uma fatia de tempo (quantum) e volta ao final da fila, eliminando o efeito comboio e reduzindo o tempo de resposta médio.</div></div></div>
     </div>
   </div>
-
-  <!-- HARDWARE -->
   <div class="section" id="comp-hardware">
     <div class="section-title"><span>Hardware</span> e Processadores</div>
     <div class="section-desc">Questões 06 e 07 — arquitetura de processadores e desempenho.</div>
     <div class="macete-grid">
-
-      <div class="macete-card full hi">
-        <div class="macete-label">Questão 06 — Processadores</div>
-        <div class="macete-title">Por que o M1 (3,2 GHz) superou o Intel i9 (5 GHz)?</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: B) Tem CPI menor e pipeline mais eficiente</span><br><br>
-          <div class="hint" style="margin-bottom:12px;"><strong>Fórmula do desempenho:</strong> Tempo = Instruções × CPI × (1/Clock). Clock maior não garante desempenho maior!</div>
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Característica</th><th>M1 (ARM/RISC)</th><th>Intel i9 (x86/CISC)</th></tr>
-            <tr><td>Arquitetura</td><td class="hlg">RISC — instruções simples</td><td class="mc">CISC — instruções complexas</td></tr>
-            <tr><td>CPI</td><td class="hlg">Menor (mais trabalho por ciclo)</td><td class="mc">Maior</td></tr>
-            <tr><td>Pipeline</td><td class="hlg">Mais eficiente</td><td class="mc">Mais complexo</td></tr>
-            <tr><td>Consumo</td><td class="hlg">Menos da metade</td><td class="mc">Alto</td></tr>
-            <tr><td>Clock</td><td class="mc">3,2 GHz</td><td class="mc">5 GHz</td></tr>
-          </table></div>
-          <div class="hint"><strong>Macete:</strong> RISC = poucas instruções simples mas executa muito rápido. CISC = instruções complexas que consomem mais ciclos (CPI maior).</div>
-        </div>
-      </div>
-
+      <div class="macete-card full hi"><div class="macete-label">Questão 06 — Processadores</div><div class="macete-title">Por que o M1 (3,2 GHz) superou o Intel i9 (5 GHz)?</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: B) Tem CPI menor e pipeline mais eficiente</span><br><br><div class="hint" style="margin-bottom:12px;"><strong>Fórmula do desempenho:</strong> Tempo = Instruções × CPI × (1/Clock). Clock maior não garante desempenho maior!</div><div class="mt-wrap"><table class="mt"><tr><th>Característica</th><th>M1 (ARM/RISC)</th><th>Intel i9 (x86/CISC)</th></tr><tr><td>Arquitetura</td><td class="hlg">RISC — instruções simples</td><td class="mc">CISC — instruções complexas</td></tr><tr><td>CPI</td><td class="hlg">Menor (mais trabalho por ciclo)</td><td class="mc">Maior</td></tr><tr><td>Pipeline</td><td class="hlg">Mais eficiente</td><td class="mc">Mais complexo</td></tr><tr><td>Consumo</td><td class="hlg">Menos da metade</td><td class="mc">Alto</td></tr><tr><td>Clock</td><td class="mc">3,2 GHz</td><td class="mc">5 GHz</td></tr></table></div><div class="hint"><strong>Macete:</strong> RISC = poucas instruções simples mas executa muito rápido. CISC = instruções complexas que consomem mais ciclos (CPI maior).</div></div></div>
     </div>
   </div>
-
-  <!-- PERMISSÕES LINUX -->
   <div class="section" id="comp-permissoes">
     <div class="section-title">Permissões <span>Linux</span></div>
     <div class="section-desc">Questões 05, 08 e 09 — notação simbólica, octal e chmod.</div>
     <div class="macete-grid">
-
-      <div class="macete-card full hi">
-        <div class="macete-label">Tabela de conversão — fundamental!</div>
-        <div class="macete-title">Como converter simbólico para octal</div>
-        <div class="macete-body">
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Simbólico</th><th>Octal</th><th>Significado</th></tr>
-            <tr><td class="hlg">rwx</td><td class="hlg">7</td><td class="mc">leitura + escrita + execução</td></tr>
-            <tr><td class="hlb">rw-</td><td class="hlb">6</td><td class="mc">leitura + escrita</td></tr>
-            <tr><td>r-x</td><td>5</td><td class="mc">leitura + execução</td></tr>
-            <tr><td>r--</td><td>4</td><td class="mc">somente leitura</td></tr>
-            <tr><td>-wx</td><td>3</td><td class="mc">escrita + execução</td></tr>
-            <tr><td>-w-</td><td>2</td><td class="mc">somente escrita</td></tr>
-            <tr><td>--x</td><td>1</td><td class="mc">somente execução</td></tr>
-            <tr><td class="hlr">---</td><td class="hlr">0</td><td class="mc">nenhuma permissão</td></tr>
-          </table></div>
-          <div class="hint"><strong>Regra:</strong> r=4, w=2, x=1. Some os valores. O código octal tem 3 dígitos: [proprietário][grupo][outros]</div>
-        </div>
-      </div>
-
-      <div class="macete-card">
-        <div class="macete-label">Questão 05</div>
-        <div class="macete-title">Proprietário: rw | Grupo: --- | Outros: ---</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: chmod 600</span><br><br>
-          Proprietário (root): rw- = 6<br>
-          Grupo: --- = 0<br>
-          Outros: --- = 0<br><br>
-          <span class="hlg">6 0 0 → chmod 600</span>
-          <div class="hint">Arquivo confidencial com senhas — só o dono lê e escreve. Ninguém mais tem acesso!</div>
-        </div>
-      </div>
-
-      <div class="macete-card">
-        <div class="macete-label">Questão 08</div>
-        <div class="macete-title">rwxr-xr-x em octal</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: B) 755</span><br><br>
-          Proprietário: rwx = 7<br>
-          Grupo: r-x = 5<br>
-          Outros: r-x = 5<br><br>
-          <span class="hlg">7 5 5 → 755</span>
-          <div class="hint">Proprietário tem tudo. Grupo e outros podem ler e executar, mas não escrever.</div>
-        </div>
-      </div>
-
-      <div class="macete-card full">
-        <div class="macete-label">Questão 09</div>
-        <div class="macete-title">Octal 644 → notação simbólica (rwx)</div>
-        <div class="macete-body">
-          <span class="resp-badge correct">✓ Resposta: rw-r--r--</span><br><br>
-          <div class="mt-wrap"><table class="mt">
-            <tr><th>Dígito</th><th>Quem</th><th>Octal</th><th>Simbólico</th><th>Permissões</th></tr>
-            <tr><td>1°</td><td>Proprietário</td><td class="hlb">6</td><td class="hlb">rw-</td><td class="mc">Lê e escreve</td></tr>
-            <tr><td>2°</td><td>Grupo</td><td>4</td><td>r--</td><td class="mc">Só lê</td></tr>
-            <tr><td>3°</td><td>Outros</td><td>4</td><td>r--</td><td class="mc">Só lê</td></tr>
-          </table></div>
-          <div class="hint"><strong>644</strong> é a permissão padrão de arquivos normais no Linux. Proprietário lê/escreve, todos os outros só leem.</div>
-        </div>
-      </div>
-
+      <div class="macete-card full hi"><div class="macete-label">Tabela de conversão — fundamental!</div><div class="macete-title">Como converter simbólico para octal</div><div class="macete-body"><div class="mt-wrap"><table class="mt"><tr><th>Simbólico</th><th>Octal</th><th>Significado</th></tr><tr><td class="hlg">rwx</td><td class="hlg">7</td><td class="mc">leitura + escrita + execução</td></tr><tr><td class="hlb">rw-</td><td class="hlb">6</td><td class="mc">leitura + escrita</td></tr><tr><td>r-x</td><td>5</td><td class="mc">leitura + execução</td></tr><tr><td>r--</td><td>4</td><td class="mc">somente leitura</td></tr><tr><td>-wx</td><td>3</td><td class="mc">escrita + execução</td></tr><tr><td>-w-</td><td>2</td><td class="mc">somente escrita</td></tr><tr><td>--x</td><td>1</td><td class="mc">somente execução</td></tr><tr><td class="hlr">---</td><td class="hlr">0</td><td class="mc">nenhuma permissão</td></tr></table></div><div class="hint"><strong>Regra:</strong> r=4, w=2, x=1. Some os valores. O código octal tem 3 dígitos: [proprietário][grupo][outros]</div></div></div>
+      <div class="macete-card"><div class="macete-label">Questão 05</div><div class="macete-title">Proprietário: rw | Grupo: --- | Outros: ---</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: chmod 600</span><br><br>Proprietário (root): rw- = 6<br>Grupo: --- = 0<br>Outros: --- = 0<br><br><span class="hlg">6 0 0 → chmod 600</span><div class="hint">Arquivo confidencial com senhas — só o dono lê e escreve. Ninguém mais tem acesso!</div></div></div>
+      <div class="macete-card"><div class="macete-label">Questão 08</div><div class="macete-title">rwxr-xr-x em octal</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: B) 755</span><br><br>Proprietário: rwx = 7<br>Grupo: r-x = 5<br>Outros: r-x = 5<br><br><span class="hlg">7 5 5 → 755</span><div class="hint">Proprietário tem tudo. Grupo e outros podem ler e executar, mas não escrever.</div></div></div>
+      <div class="macete-card full"><div class="macete-label">Questão 09</div><div class="macete-title">Octal 644 → notação simbólica (rwx)</div><div class="macete-body"><span class="resp-badge correct">✓ Resposta: rw-r--r--</span><br><br><div class="mt-wrap"><table class="mt"><tr><th>Dígito</th><th>Quem</th><th>Octal</th><th>Simbólico</th><th>Permissões</th></tr><tr><td>1°</td><td>Proprietário</td><td class="hlb">6</td><td class="hlb">rw-</td><td class="mc">Lê e escreve</td></tr><tr><td>2°</td><td>Grupo</td><td>4</td><td>r--</td><td class="mc">Só lê</td></tr><tr><td>3°</td><td>Outros</td><td>4</td><td>r--</td><td class="mc">Só lê</td></tr></table></div><div class="hint"><strong>644</strong> é a permissão padrão de arquivos normais no Linux. Proprietário lê/escreve, todos os outros só leem.</div></div></div>
     </div>
   </div>
-
-  <!-- TODAS AS QUESTÕES -->
   <div class="section" id="comp-todas">
     <div class="section-title">Todas as <span>Questões</span></div>
     <div class="section-desc">Gabarito completo das 10 questões da revisão NP2.</div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c1')"><div class="exercise-header-left"><span class="exercise-number">Q 01</span><span class="exercise-statement">CPU em 12%, disco em 98%. Qual é o fenômeno?</span></div><button class="toggle-btn" id="btnc1">▼</button></div><div class="collapsible" id="c1"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>Sistema abrindo vários programas.</p><p>CPU ociosa, disco trabalhando 100%.</p><p>SO usando disco como extensão da RAM.</p></div></div><div class="block"><div class="block-label">Análise das alternativas</div><div class="phrase"><p>A) Page Fault — evento pontual, não causa esse padrão</p><p><strong>B) Thrashing ✓ — SO paginando mais do que executando</strong></p><p>C) Cache Miss — cache do processador, não do disco</p><p>D) Deadlock — bloqueio entre processos</p><p>E) Fragmentação — espaço em disco, não memória</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">B</div><div class="answer-name valid">Thrashing</div><div class="answer-desc">Quando a RAM está cheia, o SO usa o disco como swap. Se isso for excessivo, o SO gasta mais tempo movendo páginas do que executando processos — CPU fica ociosa enquanto o disco trabalha 100%.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c2')"><div class="exercise-header-left"><span class="exercise-number">Q 02</span><span class="exercise-statement">Sistema de arquivos universal para pen drive 4GB (Windows + Linux + macOS)</span></div><button class="toggle-btn" id="btnc2">▼</button></div><div class="collapsible" id="c2"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>Pen drive de 4 GB.</p><p>Deve funcionar nativamente nos 3 SOs.</p><p>Sem drivers adicionais.</p><p>Principalmente documentos pequenos e médios.</p></div></div><div class="block"><div class="block-label">Análise das alternativas</div><div class="phrase"><p>A) NTFS — macOS tem suporte limitado para escrita</p><p>B) ext4 — Windows não reconhece nativamente</p><p>C) APFS — exclusivo da Apple</p><p><strong>D) FAT32 ✓ — universal, limite de 4GB por arquivo</strong></p><p>E) HFS+ — exclusivo da Apple</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">D</div><div class="answer-name valid">FAT32</div><div class="answer-desc">FAT32 é o único sistema de arquivos reconhecido nativamente por Windows, Linux e macOS sem drivers extras. O limite de 4GB por arquivo não é problema para documentos pequenos e médios.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c3')"><div class="exercise-header-left"><span class="exercise-number">Q 03</span><span class="exercise-statement">Processo aguardando evento externo — em qual estado está?</span></div><button class="toggle-btn" id="btnc3">▼</button></div><div class="collapsible" id="c3"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>Processo não pode continuar.</p><p>Aguarda: leitura de disco, sinal, timer, recurso.</p><p>SO coloca outros processos na CPU enquanto espera.</p></div></div><div class="block"><div class="block-label">Análise das alternativas</div><div class="phrase"><p>A) NOVO — processo recém-criado</p><p>B) PRONTO — aguardando a CPU, não um evento</p><p>C) EXECUTANDO — está usando a CPU agora</p><p><strong>D) BLOQUEADO ✓ — aguardando evento externo</strong></p><p>E) ENCERRADO — terminou a execução</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">D</div><div class="answer-name valid">BLOQUEADO</div><div class="answer-desc">O estado BLOQUEADO ocorre quando o processo não pode continuar pois está aguardando um evento externo (I/O, sinal, timer). Quando o evento chega, ele volta ao estado PRONTO.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c4')"><div class="exercise-header-left"><span class="exercise-number">Q 04</span><span class="exercise-statement">Dois processos modificam o mesmo saldo sem sincronização — qual o problema?</span></div><button class="toggle-btn" id="btnc4">▼</button></div><div class="collapsible" id="c4"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>Processo A: lê R$1.500 → soma R$300 → salva R$1.800</p><p>Processo B: lê R$1.500 → subtrai R$200 → salva R$1.300</p><p>Resultado final: R$1.800 (errado)</p><p>Correto seria: R$1.600</p></div></div><div class="block"><div class="block-label">Análise das alternativas</div><div class="phrase"><p>A) Deadlock — processos se bloqueiam mutuamente</p><p>B) Starvation — processo nunca recebe a CPU</p><p><strong>C) Race Condition ✓ — resultado depende da ordem de execução</strong></p><p>D) Page Fault — problema de memória virtual</p><p>E) Context Switch — troca de contexto normal do SO</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">C</div><div class="answer-name valid">Race Condition — resolvido com mutex</div><div class="answer-desc">Race Condition (condição de corrida) ocorre quando dois processos acessam o mesmo recurso sem sincronização e o resultado final depende da ordem de execução. Mutex (exclusão mútua) resolve travando o recurso enquanto um processo o usa.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c5')"><div class="exercise-header-left"><span class="exercise-number">Q 05</span><span class="exercise-statement">Arquivo confidencial: proprietário lê/escreve, grupo e outros: nenhum acesso</span></div><button class="toggle-btn" id="btnc5">▼</button></div><div class="collapsible" id="c5"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>Proprietário (root): leitura e escrita</p><p>Grupo: nenhum tipo de acesso</p><p>Outros usuários: nenhum tipo de acesso</p></div></div><div class="block"><div class="block-label">Cálculo</div><div class="phrase"><p>Proprietário: rw- = 4+2+0 = <strong>6</strong></p><p>Grupo: --- = 0+0+0 = <strong>0</strong></p><p>Outros: --- = 0+0+0 = <strong>0</strong></p><p>Resultado: <strong>600</strong></p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">chmod 600</div><div class="answer-name valid">Permissão 600 — rw-------</div><div class="answer-desc">chmod 600 garante que somente o proprietário (root) pode ler e escrever o arquivo. Grupo e outros usuários não têm acesso algum. Ideal para arquivos com senhas e dados sensíveis.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c6')"><div class="exercise-header-left"><span class="exercise-number">Q 06</span><span class="exercise-statement">Por que o chip M1 (3,2 GHz) superou o Intel i9 (5 GHz)?</span></div><button class="toggle-btn" id="btnc6">▼</button></div><div class="collapsible" id="c6"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>M1: 3,2 GHz, arquitetura ARM (RISC)</p><p>i9: 5 GHz, arquitetura x86 (CISC)</p><p>M1 superou em desempenho consumindo menos energia</p></div></div><div class="block"><div class="block-label">Análise das alternativas</div><div class="phrase"><p>A) Mais núcleos — não foi o motivo principal citado</p><p><strong>B) CPI menor e pipeline mais eficiente ✓</strong></p><p>C) Memória RAM mais rápida — não mencionado</p><p>D) 3 nanômetros — tecnologia de fabricação diferente</p><p>E) Só programas macOS — falso</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">B</div><div class="answer-name valid">CPI menor e pipeline mais eficiente</div><div class="answer-desc">RISC (ARM) tem instruções simples e fixas, permitindo pipeline mais eficiente e CPI menor. CISC (x86) tem instruções complexas que precisam de múltiplos ciclos. Desempenho = Instruções × CPI × (1/Clock) — clock maior não garante vitória.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c7')"><div class="exercise-header-left"><span class="exercise-number">Q 07</span><span class="exercise-statement">RAM em 94%, swap intensivo — qual ação traz maior impacto no desempenho?</span></div><button class="toggle-btn" id="btnc7">▼</button></div><div class="collapsible" id="c7"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>RAM em 94% de uso</p><p>Swap (disco) sendo usado intensivamente</p><p>RAM: 60 ns | SSD NVMe: 50 µs | HD: 10 ms</p></div></div><div class="block"><div class="block-label">Análise das alternativas</div><div class="phrase"><p>A) Trocar HD por SSD NVMe — melhora swap, não elimina</p><p>B) Aumentar clock CPU — CPU não é o gargalo</p><p><strong>C) Adicionar mais RAM ✓ — elimina a necessidade de swap</strong></p><p>D) Trocar SO para Linux — não resolve falta de RAM</p><p>E) Aumentar quantum Round Robin — não tem relação</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">C</div><div class="answer-name valid">Adicionar mais memória RAM</div><div class="answer-desc">O gargalo é a falta de RAM. Adicionar RAM elimina o swap completamente — RAM é 833x mais rápida que SSD NVMe e 166.000x mais rápida que HD. É a solução direta para o problema.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c8')"><div class="exercise-header-left"><span class="exercise-number">Q 08</span><span class="exercise-statement">Qual o código octal da permissão rwxr-xr-x?</span></div><button class="toggle-btn" id="btnc8">▼</button></div><div class="collapsible" id="c8"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>r=4, w=2, x=1</p><p>Proprietário: rwx = 4+2+1 = 7</p><p>Grupo: r-x = 4+0+1 = 5</p><p>Outros: r-x = 4+0+1 = 5</p></div></div><div class="block"><div class="block-label">Análise das alternativas</div><div class="phrase"><p>A) 644 — rw-r--r-- (sem execução)</p><p><strong>B) 755 ✓ — rwxr-xr-x</strong></p><p>C) 777 — rwxrwxrwx (todos podem tudo)</p><p>D) 600 — rw------- (só proprietário)</p><p>E) 700 — rwx------ (só proprietário executa)</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">B</div><div class="answer-name valid">755</div><div class="answer-desc">rwx=7, r-x=5, r-x=5. Proprietário tem controle total (lê, escreve, executa). Grupo e outros podem ler e executar, mas não modificar. Permissão típica de executáveis e scripts.</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c9')"><div class="exercise-header-left"><span class="exercise-number">Q 09</span><span class="exercise-statement">Converter permissão octal 644 para notação simbólica (rwx)</span></div><button class="toggle-btn" id="btnc9">▼</button></div><div class="collapsible" id="c9"><div class="exercise-body"><div class="block"><div class="block-label">Conversão</div><div class="phrase"><p>6 → rw- (4+2 = leitura e escrita)</p><p>4 → r-- (4 = somente leitura)</p><p>4 → r-- (4 = somente leitura)</p></div></div><div class="block"><div class="block-label">Resultado</div><div class="phrase"><p>Proprietário: <strong>rw-</strong></p><p>Grupo: <strong>r--</strong></p><p>Outros: <strong>r--</strong></p><p>Completo: <strong>rw-r--r--</strong></p></div></div><div class="answer-block"><div class="answer-icon info">✎</div><div class="answer-text"><div class="answer-letter">rw-r--r--</div><div class="answer-name info">Permissão 644 em simbólico</div><div class="answer-desc">Questão dissertativa. 644 é a permissão padrão de arquivos de texto no Linux. O proprietário pode ler e escrever (rw-), enquanto grupo e outros só podem ler (r--).</div></div></div></div></div></div>
-
     <div class="exercise"><div class="exercise-header" onclick="toggle('c10')"><div class="exercise-header-left"><span class="exercise-number">Q 10</span><span class="exercise-statement">Principal vantagem do Round Robin sobre o FCFS — questão dissertativa</span></div><button class="toggle-btn" id="btnc10">▼</button></div><div class="collapsible" id="c10"><div class="exercise-body"><div class="block"><div class="block-label">FCFS</div><div class="phrase"><p>First Come, First Served</p><p>Sem preempção — processo longo monopoliza CPU</p><p>Efeito comboio: processos curtos esperam atrás dos longos</p><p>Alto tempo de resposta médio</p></div></div><div class="block"><div class="block-label">Round Robin</div><div class="phrase"><p>Cada processo recebe um quantum (fatia de tempo)</p><p>Ao esgotar o quantum, volta ao final da fila</p><p>Preempção garantida — ninguém monopoliza</p><p>Baixo tempo de resposta para todos</p></div></div><div class="answer-block"><div class="answer-icon info">✎</div><div class="answer-text"><div class="answer-letter">Resposta dissertativa</div><div class="answer-name info">Menor tempo de resposta / Sem efeito comboio</div><div class="answer-desc">O Round Robin distribui a CPU de forma justa entre todos os processos usando um quantum fixo. Isso elimina o "efeito comboio" do FCFS, onde processos curtos ficam presos atrás de processos longos, resultando em menor tempo de resposta médio em sistemas de tempo compartilhado.</div></div></div></div></div></div>
-
     <div class="footer"><div class="footer-text">ORGANIZAÇÃO DE COMPUTADORES — UNIP 2026 · NP2</div><div class="score">10/10 ✓ Gabarito completo</div></div>
+  </div>
+</div>
+</div>
+
+<div class="materia" id="mat-psi">
+<div class="page">
+  <div class="header">
+    <div class="header-tag">UNIP — Sistemas de Informação — PSI</div>
+    <h1>Guia Completo de<br><span>ERP · CRM · SIG · Conhecimento</span></h1>
+    <p class="header-sub">Macetes, tabelas e resumos focados na prova. Clique nas abas para navegar.</p>
+    <div class="header-line"></div>
+  </div>
+  <div class="nav">
+    <button class="nav-btn active" onclick="showSection('psi','erp',this)">🏭 ERP</button>
+    <button class="nav-btn" onclick="showSection('psi','crm',this)">🤝 CRM</button>
+    <button class="nav-btn" onclick="showSection('psi','sig',this)">📊 SIG / SSD</button>
+    <button class="nav-btn" onclick="showSection('psi','conhecimento',this)">🧠 Gest. Conhecimento</button>
+    <button class="nav-btn" onclick="showSection('psi','exercicios',this)">📝 10 Exercícios</button>
+  </div>
+
+  <div class="section active" id="psi-erp">
+    <div class="section-title">ERP — <span>Enterprise Resource Planning</span></div>
+    <div class="section-desc">Sistema integrado de gestão que unifica todos os processos de uma empresa em um único banco de dados.</div>
+    <div class="macete-grid">
+      <div class="macete-card full hi">
+        <div class="macete-label">Macete #1 — Tipos de empresa</div>
+        <div class="macete-title">Cada tipo tem um foco diferente no ERP</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Tipo</th><th>O que faz</th><th>Foco no ERP</th></tr>
+            <tr><td class="hl">Indústria</td><td class="mc">Transforma matéria-prima em produto</td><td class="mc">Produção, estoque, MRP</td></tr>
+            <tr><td class="hl">Comércio</td><td class="mc">Compra para revender (sem transformar)</td><td class="mc">Vendas, estoque, compras</td></tr>
+            <tr><td class="hl">Serviços</td><td class="mc">Vende intangível (consulta, manutenção)</td><td class="mc">RH, projetos, faturamento</td></tr>
+            <tr><td class="hl">Agronegócios</td><td class="mc">Produção agrícola e pecuária</td><td class="mc">Safra, insumos, logística</td></tr>
+            <tr><td class="hl">Governo</td><td class="mc">Gestão pública</td><td class="mc">Orçamento, licitação, folha</td></tr>
+          </table></div>
+          <div class="hint"><strong>Macete:</strong> Indústria = transforma. Comércio = revende. Serviços = entrega intangível. Agro = campo. Governo = público.</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete #2 — Evolução histórica</div>
+        <div class="macete-title">A linha do tempo MRP → ERP (cai muito na prova!)</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Ano</th><th>Evento</th><th>Significado</th></tr>
+            <tr><td class="hl">1959</td><td class="mc">American Bosch</td><td class="mc">1º sistema MRP do mundo — planejamento de materiais</td></tr>
+            <tr><td class="hl">1961</td><td class="mc">J.I. Case / Dr. Joseph Orlicky</td><td class="mc">Sistematizou o MRP com método formal</td></tr>
+            <tr><td class="hl">1972</td><td class="mc">IBM — COPICS</td><td class="mc">Primeiro sistema considerado ERP — integração total</td></tr>
+            <tr><td class="hlg">MRP</td><td class="mc">Material Requirements Planning</td><td class="mc">Planejamento de necessidade de materiais</td></tr>
+            <tr><td class="hlg">MRP II</td><td class="mc">Manufacturing Resource Planning</td><td class="mc">Adicionou planejamento de capacidade e produção</td></tr>
+            <tr><td class="hlg">ERP</td><td class="mc">Enterprise Resource Planning</td><td class="mc">Integra TODOS os departamentos da empresa</td></tr>
+          </table></div>
+          <div class="hint"><strong>Ordem correta:</strong> MRP (materiais) → MRP II (produção) → ERP (empresa toda). Cada evolução amplia o escopo!</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #3 — Ilhas de Sistemas</div>
+        <div class="macete-title">O problema que o ERP resolve</div>
+        <div class="macete-body">
+          Antes do ERP, cada departamento tinha seu próprio sistema <strong>isolado</strong> — eles não se comunicavam.<br><br>
+          <span class="hlr">Problema:</span> dados duplicados, inconsistências, retrabalho.<br><br>
+          <span class="hlg">Solução ERP:</span> um único banco de dados integrado para toda a empresa.<br><br>
+          <div class="hint"><strong>Macete:</strong> Ilha = isolado. ERP = integrado. A "ilha" é o antônimo do ERP.</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #4 — Chaves comuns</div>
+        <div class="macete-title">O que conecta os módulos do ERP</div>
+        <div class="macete-body">
+          As chaves comuns são os <strong>campos que aparecem em todos os módulos</strong> e permitem a integração:<br><br>
+          <span class="hlg">CPF</span> — identifica pessoa física<br>
+          <span class="hlg">CNPJ</span> — identifica empresa (pessoa jurídica)<br>
+          <span class="hlg">Matrícula</span> — identifica funcionário<br>
+          <span class="hlg">Código do produto</span> — identifica item no estoque<br><br>
+          <div class="hint"><strong>Macete:</strong> A chave comum é o "ID único" que amarra as informações de todos os módulos.</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete #5 — Módulos do ERP</div>
+        <div class="macete-title">Os principais módulos integrados</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Módulo</th><th>O que gerencia</th></tr>
+            <tr><td class="hlg">Financeiro / Contabilidade</td><td class="mc">Contas a pagar/receber, balanço, fluxo de caixa</td></tr>
+            <tr><td class="hlg">RH</td><td class="mc">Folha de pagamento, admissão, benefícios</td></tr>
+            <tr><td class="hlg">Estoque / Almoxarifado</td><td class="mc">Entradas, saídas, inventário, lote</td></tr>
+            <tr><td class="hlg">Compras</td><td class="mc">Pedidos, fornecedores, cotações</td></tr>
+            <tr><td class="hlg">Vendas / Faturamento</td><td class="mc">Pedidos de venda, NF, comissões</td></tr>
+            <tr><td class="hlg">Produção / PCP</td><td class="mc">Ordens de produção, MRP, capacidade</td></tr>
+          </table></div>
+          <div class="hint"><strong>Todos os módulos compartilham o mesmo banco de dados</strong> — isso é a essência do ERP. Uma venda lançada no módulo Vendas já atualiza o Estoque e o Financeiro automaticamente.</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete #6 — Davenport 1998</div>
+        <div class="macete-title">5 pontos críticos para implementação de ERP (Thomas Davenport)</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>#</th><th>Ponto crítico</th><th>Por quê é crítico</th></tr>
+            <tr><td class="hl">1</td><td class="mc">Comprometimento da alta gerência</td><td class="mc">Sem patrocínio executivo, o projeto para</td></tr>
+            <tr><td class="hl">2</td><td class="mc">Redesenho de processos ANTES do sistema</td><td class="mc">O ERP deve se adaptar ao processo, não o contrário</td></tr>
+            <tr><td class="hl">3</td><td class="mc">Migração de dados</td><td class="mc">Dados sujos no legado = ERP inutilizável</td></tr>
+            <tr><td class="hl">4</td><td class="mc">Treinamento dos usuários</td><td class="mc">Sistema implantado mas não usado = fracasso</td></tr>
+            <tr><td class="hl">5</td><td class="mc">Gestão da mudança</td><td class="mc">Resistência cultural derruba implementações</td></tr>
+          </table></div>
+          <div class="hint"><strong>Davenport 1998</strong> é o autor clássico de referência em ERP. Memorize os 5 pontos — eles aparecem muito em questões dissertativas!</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #7 — Parametrização</div>
+        <div class="macete-title">Configurar ≠ Customizar</div>
+        <div class="macete-body">
+          <strong>Parametrização</strong> = configurar o ERP usando as opções que ele já oferece, sem alterar o código-fonte.<br><br>
+          <span class="hlg">Parametrizar</span> = usar switches/chaves para adaptar o sistema.<br>
+          <span class="hlr">Customizar</span> = alterar código = caro + difícil de atualizar.<br><br>
+          <div class="hint"><strong>Boa prática:</strong> sempre parametrizar primeiro. Customizar só como último recurso!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="psi-crm">
+    <div class="section-title">CRM — <span>Customer Relationship Management</span></div>
+    <div class="section-desc">Gestão do relacionamento com o cliente — desde a prospecção até a fidelização.</div>
+    <div class="macete-grid">
+      <div class="macete-card full hi">
+        <div class="macete-label">Macete #1 — Ciclo de vendas</div>
+        <div class="macete-title">As 3 fases que o CRM gerencia</div>
+        <div class="macete-body">
+          <div class="ciclo">
+            <div class="ciclo-fase pre">
+              <div class="ciclo-label">Pré-Venda</div>
+              <div class="ciclo-title">Persuasão</div>
+              <div class="ciclo-body">Prospecção, marketing, leads, apresentações, propostas</div>
+            </div>
+            <div class="ciclo-fase venda">
+              <div class="ciclo-label">Venda</div>
+              <div class="ciclo-title">Receita</div>
+              <div class="ciclo-body">Conversão, fechamento, contrato, faturamento</div>
+            </div>
+            <div class="ciclo-fase pos">
+              <div class="ciclo-label">Pós-Venda</div>
+              <div class="ciclo-title">Fidelização</div>
+              <div class="ciclo-body">Entrega, suporte, feedback, satisfação, recompra</div>
+            </div>
+          </div>
+          <div class="hint"><strong>Macete:</strong> Pré = persuadir. Venda = converter em dinheiro. Pós = manter o cliente feliz e comprar de novo.</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete #2 — Os 3 níveis do CRM</div>
+        <div class="macete-title">Operacional · Colaborativo · Analítico</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Nível</th><th>Foco</th><th>Exemplos</th></tr>
+            <tr><td class="hlg">Operacional</td><td class="mc">Automação dos processos de negócio com o cliente</td><td class="mc">Call center, força de vendas, atendimento automatizado</td></tr>
+            <tr><td class="hlg">Colaborativo</td><td class="mc">Interação com o cliente em múltiplos canais</td><td class="mc">E-mail, chat, telefone, redes sociais, portal do cliente</td></tr>
+            <tr><td class="hlg">Analítico</td><td class="mc">Análise de dados para tomada de decisão</td><td class="mc">Perfil de compra, segmentação, previsão de churn, campanhas</td></tr>
+          </table></div>
+          <div class="hint"><strong>Macete:</strong> Operacional = faz. Colaborativo = comunica. Analítico = pensa/decide com dados.</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #3 — E-commerce vs E-business</div>
+        <div class="macete-title">Não são a mesma coisa!</div>
+        <div class="macete-body">
+          <span class="hlg">E-commerce</span> = venda de produtos/serviços pela internet.<br><br>
+          <span class="hl">E-business</span> = toda a gestão empresarial feita com apoio digital (inclui o e-commerce + processos internos + parceiros).<br><br>
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Termo</th><th>Escopo</th></tr>
+            <tr><td class="hlg">E-commerce</td><td class="mc">Só a venda online</td></tr>
+            <tr><td class="hl">E-business</td><td class="mc">Tudo digital: compra, venda, processos, parceiros</td></tr>
+          </table></div>
+          <div class="hint"><strong>Macete:</strong> E-business ⊃ E-commerce. Todo e-commerce é e-business, mas nem todo e-business é e-commerce.</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #4 — Falhas de implementação</div>
+        <div class="macete-title">Por que os projetos de CRM falham</div>
+        <div class="macete-body">
+          <span class="hlr">1.</span> Ver CRM apenas como <strong>software</strong>, não como estratégia<br>
+          <span class="hlr">2.</span> Falta de <strong>comprometimento</strong> da liderança<br>
+          <span class="hlr">3.</span> Não mapear os <strong>processos</strong> antes de implantar<br>
+          <span class="hlr">4.</span> Falta de <strong>treinamento</strong> dos usuários<br>
+          <span class="hlr">5.</span> Não integrar com outros sistemas (ERP, e-mail)<br><br>
+          <div class="hint"><strong>Macete:</strong> CRM falha pelos mesmos motivos que ERP — tecnologia é só a ferramenta, processo e pessoas é que fazem funcionar.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="psi-sig">
+    <div class="section-title">SIG / SSD — <span>Sistemas de Informação Gerencial</span></div>
+    <div class="section-desc">Sistemas que transformam dados operacionais em informação para tomada de decisão gerencial e estratégica.</div>
+    <div class="macete-grid">
+      <div class="macete-card full hi">
+        <div class="macete-label">Macete #1 — Os 3 níveis de decisão</div>
+        <div class="macete-title">Estratégico · Tático · Operacional</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Nível</th><th>Quem decide</th><th>Horizonte</th><th>Tipo de informação</th><th>Exemplos</th></tr>
+            <tr><td class="hlg">Estratégico</td><td class="mc">Alta direção (CEO, Diretores)</td><td class="mc">Longo prazo (anos)</td><td class="hl">Não-estruturada</td><td class="mc">Expansão, fusão, novos mercados</td></tr>
+            <tr><td class="hl">Tático</td><td class="mc">Gerentes, Coordenadores</td><td class="mc">Médio prazo (meses)</td><td class="hl">Semi-estruturada</td><td class="mc">Budget, metas de vendas, treinamentos</td></tr>
+            <tr><td class="hlb">Operacional</td><td class="mc">Supervisores, Funcionários</td><td class="mc">Curto prazo (dias)</td><td class="hlb">Estruturada</td><td class="mc">Emitir NF, pagar conta, registrar pedido</td></tr>
+          </table></div>
+          <div class="hint"><strong>Macete:</strong> Quanto mais alto o nível → mais longo o prazo → mais desestruturada a informação. Operacional = rotina = estruturado. Estratégico = futuro = livre.</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #2 — Tipos de informação</div>
+        <div class="macete-title">Estruturada · Semi · Não-estruturada</div>
+        <div class="macete-body">
+          <span class="hlb">Estruturada</span> = segue padrão fixo, armazenada em banco de dados. Ex: nota fiscal, folha de ponto.<br><br>
+          <span class="hl">Semi-estruturada</span> = tem algum padrão mas permite variações. Ex: e-mail, relatório gerencial.<br><br>
+          <span class="hlg">Não-estruturada</span> = livre, qualquer formato. Ex: reunião, análise de mercado, vídeo.<br><br>
+          <div class="hint"><strong>Macete:</strong> Estruturada = formulário. Semi = e-mail. Não-estruturada = conversa de corredor.</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #3 — SIG vs SSD</div>
+        <div class="macete-title">EIS vs DSS — nomes e funções</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Sigla PT</th><th>Sigla EN</th><th>Quem usa</th><th>Para quê</th></tr>
+            <tr><td class="hlg">SIG</td><td class="mc">EIS / MIS</td><td class="mc">Alta gerência</td><td class="mc">Relatórios gerenciais, dashboards, KPIs</td></tr>
+            <tr><td class="hl">SSD</td><td class="mc">DSS</td><td class="mc">Gestores táticos</td><td class="mc">Simulações, análises e apoio a decisões semiestruturadas</td></tr>
+          </table></div>
+          <div class="hint"><strong>SIG = EIS</strong> (Executive Info System). <strong>SSD = DSS</strong> (Decision Support System). O SIG é alimentado pelo ERP, SCM e CRM!</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete #4 — Exemplos por nível</div>
+        <div class="macete-title">O que cada sistema entrega em cada nível</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Nível</th><th>Sistema</th><th>Exemplo concreto</th></tr>
+            <tr><td class="hlg">Estratégico</td><td class="mc">SIG / EIS</td><td class="mc">Dashboard com crescimento de market share nos últimos 5 anos para o CEO decidir sobre expansão</td></tr>
+            <tr><td class="hl">Tático</td><td class="mc">SSD / DSS</td><td class="mc">Análise de cenários de vendas para o gerente definir meta do trimestre</td></tr>
+            <tr><td class="hlb">Operacional</td><td class="mc">ERP / TPS</td><td class="mc">Sistema de emissão de nota fiscal, registro de ponto, entrada de estoque</td></tr>
+          </table></div>
+          <div class="hint"><strong>Fluxo:</strong> TPS/ERP coleta dados operacionais → alimenta o SIG → que apoia decisões táticas e estratégicas.</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete #5 — O que alimenta o SIG</div>
+        <div class="macete-title">De onde vêm os dados do SIG / EIS</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Sistema fonte</th><th>Dados que fornece ao SIG</th></tr>
+            <tr><td class="hlg">ERP</td><td class="mc">Dados financeiros, estoque, RH, produção, compras</td></tr>
+            <tr><td class="hlg">CRM</td><td class="mc">Dados de clientes, vendas, satisfação, retenção</td></tr>
+            <tr><td class="hlg">SCM</td><td class="mc">Dados de cadeia de suprimentos, fornecedores, logística</td></tr>
+          </table></div>
+          <div class="hint"><strong>SIG = camada de inteligência</strong> por cima dos sistemas transacionais. Ele não gera dados, ele consolida e apresenta os dados do ERP, CRM e SCM para tomada de decisão.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="psi-conhecimento">
+    <div class="section-title">Gestão do <span>Conhecimento</span></div>
+    <div class="section-desc">Takeuchi & Nonaka (1995) — como as organizações criam, capturam e compartilham conhecimento.</div>
+    <div class="macete-grid">
+      <div class="macete-card full hi">
+        <div class="macete-label">Macete #1 — Hierarquia do conhecimento</div>
+        <div class="macete-title">Dado → Informação → Conhecimento</div>
+        <div class="macete-body">
+          <div class="hier">
+            <div class="hier-item d">
+              <div class="hier-icon">📊</div>
+              <div>
+                <div class="hier-label">DADO</div>
+                <div class="hier-desc">Fato bruto, sem contexto. Ex: "37" ou "João" — não significa nada sozinho.</div>
+              </div>
+            </div>
+            <div style="text-align:center;color:var(--accent);font-size:18px;padding:4px 0;">↓</div>
+            <div class="hier-item i">
+              <div class="hier-icon">📋</div>
+              <div>
+                <div class="hier-label">INFORMAÇÃO</div>
+                <div class="hier-desc">Dado com contexto e significado. Ex: "João tem 37 anos de idade." — agora faz sentido.</div>
+              </div>
+            </div>
+            <div style="text-align:center;color:var(--accent);font-size:18px;padding:4px 0;">↓</div>
+            <div class="hier-item c">
+              <div class="hier-icon">🧠</div>
+              <div>
+                <div class="hier-label">CONHECIMENTO</div>
+                <div class="hier-desc">Informação aplicada com experiência e julgamento. Ex: "João tem 37 anos, está apto para a vaga sênior." — gera ação.</div>
+              </div>
+            </div>
+          </div>
+          <div class="hint" style="margin-top:14px;"><strong>Macete:</strong> Dado = bruto. Informação = contexto. Conhecimento = ação. Cada nível agrega valor ao anterior.</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #2 — Tácito vs Explícito</div>
+        <div class="macete-title">Os 2 tipos de conhecimento</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Tipo</th><th>Característica</th><th>Exemplo</th></tr>
+            <tr><td class="hl">Tácito</td><td class="mc">Informal, na cabeça das pessoas, difícil de documentar</td><td class="mc">Habilidade de negociação, intuição, "feeling" de mercado</td></tr>
+            <tr><td class="hlg">Explícito</td><td class="mc">Formal, documentado, fácil de transmitir</td><td class="mc">Manual, procedimento, planilha, livro, relatório</td></tr>
+          </table></div>
+          <div class="hint"><strong>Macete:</strong> Tácito = "está na cabeça" (tá-cito = ta calado, não foi dito). Explícito = "está escrito/explicado".</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Macete #3 — Takeuchi & Nonaka 1995</div>
+        <div class="macete-title">The Knowledge-Creating Company</div>
+        <div class="macete-body">
+          Obra fundamental publicada em <span class="hl">1995</span> que propôs o modelo SECI de criação de conhecimento nas organizações.<br><br>
+          <strong>Premissa principal:</strong> o conhecimento organizacional é criado pela conversão entre tácito e explícito.<br><br>
+          <div class="hint"><strong>Na prova:</strong> Se cair "quem propôs a distinção tácito/explícito", a resposta é <strong>Takeuchi &amp; Nonaka (1995)</strong>!</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete #4 — Modelo SECI (o mais cobrado!)</div>
+        <div class="macete-title">As 4 conversões de conhecimento</div>
+        <div class="macete-body">
+          <div class="seci-grid">
+            <div class="seci-card s">
+              <div class="seci-letter">S</div>
+              <div class="seci-name">Socialização</div>
+              <div class="seci-arrow">Tácito → Tácito</div>
+              <div class="seci-desc">Compartilhamento de experiências presencialmente. Ex: aprendiz observando o mestre, mentoria, reunião de brainstorm.</div>
+            </div>
+            <div class="seci-card e">
+              <div class="seci-letter">E</div>
+              <div class="seci-name">Externalização</div>
+              <div class="seci-arrow">Tácito → Explícito</div>
+              <div class="seci-desc">Transforma o que está na cabeça em documento. Ex: especialista escreve um manual, grava um vídeo-aula, documenta um processo.</div>
+            </div>
+            <div class="seci-card c">
+              <div class="seci-letter">C</div>
+              <div class="seci-name">Combinação</div>
+              <div class="seci-arrow">Explícito → Explícito</div>
+              <div class="seci-desc">Combina documentos existentes para criar novo conhecimento. Ex: juntar relatórios, criar banco de dados, consolidar manuais.</div>
+            </div>
+            <div class="seci-card i">
+              <div class="seci-letter">I</div>
+              <div class="seci-name">Internalização</div>
+              <div class="seci-arrow">Explícito → Tácito</div>
+              <div class="seci-desc">Aprender com o que está documentado até virar habilidade natural. Ex: ler o manual e praticar até dominar sem precisar do manual.</div>
+            </div>
+          </div>
+          <div class="hint" style="margin-top:14px;"><strong>Macete SECI:</strong> <span class="hl">S</span>ocializa (T→T) | <span class="hl">E</span>xternaliza (T→E) | <span class="hl">C</span>ombina (E→E) | <span class="hl">I</span>nternaliza (E→T). A sigla forma uma espiral infinita de criação de conhecimento!</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete #5 — Exemplos práticos do SECI</div>
+        <div class="macete-title">Identificar qual modo é qual na prova</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Situação</th><th>Conversão</th><th>Modo SECI</th></tr>
+            <tr><td class="mc">Estagiário aprende observando o vendedor experiente</td><td class="mc">Tácito → Tácito</td><td class="hlg">Socialização</td></tr>
+            <tr><td class="mc">Gerente escreve procedimento com base na sua experiência</td><td class="mc">Tácito → Explícito</td><td class="hl">Externalização</td></tr>
+            <tr><td class="mc">TI junta vários manuais e cria um único sistema de wiki</td><td class="mc">Explícito → Explícito</td><td class="hlb">Combinação</td></tr>
+            <tr><td class="mc">Funcionário lê o manual de vendas e começa a aplicar naturalmente</td><td class="mc">Explícito → Tácito</td><td class="hlg">Internalização</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="psi-exercicios">
+    <div class="section-title">10 <span>Exercícios</span> PSI</div>
+    <div class="section-desc">Questões sobre ERP, CRM, SIG/SSD e Gestão do Conhecimento. Clique para ver a resposta.</div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p1')"><div class="exercise-header-left"><span class="exercise-number">Q 01</span><span class="exercise-statement">Uma empresa que compra produtos prontos para revender sem transformá-los é classificada como qual tipo?</span></div><button class="toggle-btn" id="btnp1">▼</button></div><div class="collapsible" id="p1"><div class="exercise-body"><div class="block"><div class="block-label">Opções</div><div class="phrase"><p>A) Indústria</p><p>B) Comércio</p><p>C) Serviços</p><p>D) Agronegócios</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>Indústria = transforma matéria-prima.</p><p>Comércio = compra pronto e revende.</p><p>Serviços = entrega intangível.</p><p>A chave é "sem transformar" + "para revender".</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">B</div><div class="answer-name valid">Comércio</div><div class="answer-desc">Empresa comercial compra produtos prontos de fornecedores e os revende sem transformação. A indústria transforma matéria-prima. O serviço entrega algo intangível.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p2')"><div class="exercise-header-left"><span class="exercise-number">Q 02</span><span class="exercise-statement">Qual foi o primeiro sistema considerado ERP, lançado em 1972 pela IBM?</span></div><button class="toggle-btn" id="btnp2">▼</button></div><div class="collapsible" id="p2"><div class="exercise-body"><div class="block"><div class="block-label">Contexto histórico</div><div class="phrase"><p>1959 — American Bosch: 1º MRP</p><p>1961 — Dr. Orlicky / J.I. Case: sistematizou MRP</p><p>1972 — IBM: lançou sistema integrado</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>O sistema COPICS da IBM em 1972 foi o primeiro a integrar múltiplos módulos empresariais, sendo considerado o precursor do ERP moderno.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">COPICS</div><div class="answer-name valid">IBM COPICS — 1972</div><div class="answer-desc">O COPICS (Communications Oriented Production Information and Control System) da IBM em 1972 é considerado o primeiro ERP — integrava produção, estoque e finanças em um único sistema.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p3')"><div class="exercise-header-left"><span class="exercise-number">Q 03</span><span class="exercise-statement">Departamentos com sistemas isolados que não se comunicam entre si formam o que no contexto de ERP?</span></div><button class="toggle-btn" id="btnp3">▼</button></div><div class="collapsible" id="p3"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>Antes do ERP, cada setor tinha seu próprio sistema.</p><p>Dados duplicados, inconsistências, retrabalho.</p><p>Integração era feita manualmente.</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>O conceito tem um nome específico que representa sistemas fechados em si mesmos, sem integração.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">Ilhas</div><div class="answer-name valid">Ilhas de Sistemas</div><div class="answer-desc">Sistemas isolados que não se comunicam são chamados de "Ilhas de Sistemas". O ERP resolve esse problema centralizando todos os dados em um único banco de dados compartilhado por todos os módulos.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p4')"><div class="exercise-header-left"><span class="exercise-number">Q 04</span><span class="exercise-statement">Segundo Davenport (1998), qual é o primeiro ponto crítico para uma implementação de ERP bem-sucedida?</span></div><button class="toggle-btn" id="btnp4">▼</button></div><div class="collapsible" id="p4"><div class="exercise-body"><div class="block"><div class="block-label">Os 5 pontos de Davenport</div><div class="phrase"><p>1. Comprometimento da alta gerência</p><p>2. Redesenho de processos antes do sistema</p><p>3. Migração de dados</p><p>4. Treinamento</p><p>5. Gestão da mudança</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>Sem o apoio da alta direção, nenhum projeto de ERP sobrevive. É a base de tudo.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">Ponto #1</div><div class="answer-name valid">Comprometimento da alta gerência</div><div class="answer-desc">Davenport (1998) coloca o patrocínio executivo como o primeiro e mais crítico fator. Sem o comprometimento da alta direção, os outros 4 pontos são impossíveis de garantir.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p5')"><div class="exercise-header-left"><span class="exercise-number">Q 05</span><span class="exercise-statement">Qual nível do CRM é responsável por analisar dados de clientes para tomada de decisão estratégica?</span></div><button class="toggle-btn" id="btnp5">▼</button></div><div class="collapsible" id="p5"><div class="exercise-body"><div class="block"><div class="block-label">Os 3 níveis do CRM</div><div class="phrase"><p>Operacional = automação de processos</p><p>Colaborativo = múltiplos canais de contato</p><p>Analítico = análise de dados</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>A questão foca em "analisar dados" e "tomada de decisão" — isso é função do nível que trabalha com inteligência e análise.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">Analítico</div><div class="answer-name valid">CRM Analítico</div><div class="answer-desc">O CRM Analítico utiliza os dados coletados dos outros níveis para análise de padrões, segmentação de clientes, previsão de churn e apoio a decisões estratégicas de marketing e vendas.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p6')"><div class="exercise-header-left"><span class="exercise-number">Q 06</span><span class="exercise-statement">Uma empresa possui loja virtual, mas também usa sistemas digitais para gerir fornecedores e processos internos. Isso é E-commerce ou E-business?</span></div><button class="toggle-btn" id="btnp6">▼</button></div><div class="collapsible" id="p6"><div class="exercise-body"><div class="block"><div class="block-label">Definições</div><div class="phrase"><p>E-commerce = apenas vendas online</p><p>E-business = toda gestão empresarial digital</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>A questão descreve não só venda online (e-commerce), mas também gestão de fornecedores e processos internos — isso vai além do e-commerce.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">E-business</div><div class="answer-name valid">E-business (que engloba o E-commerce)</div><div class="answer-desc">E-business é o termo mais amplo: abrange não só as vendas online (e-commerce), mas toda a operação empresarial apoiada por tecnologia digital, incluindo relacionamento com fornecedores e gestão de processos internos.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p7')"><div class="exercise-header-left"><span class="exercise-number">Q 07</span><span class="exercise-statement">O CEO precisa decidir sobre expansão para um novo mercado. Em qual nível de decisão e com qual tipo de informação ele trabalha?</span></div><button class="toggle-btn" id="btnp7">▼</button></div><div class="collapsible" id="p7"><div class="exercise-body"><div class="block"><div class="block-label">Os 3 níveis</div><div class="phrase"><p>Estratégico — Alta direção — Longo prazo — Não-estruturada</p><p>Tático — Gerentes — Médio prazo — Semi-estruturada</p><p>Operacional — Funcionários — Curto prazo — Estruturada</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>CEO = alta direção. Expansão = decisão de longo prazo. Informações de mercado externo = não-estruturadas (análises, pesquisas, tendências).</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">Estratégico</div><div class="answer-name valid">Nível Estratégico — Informação Não-Estruturada</div><div class="answer-desc">O CEO opera no nível estratégico com decisões de longo prazo. As informações sobre expansão de mercado são não-estruturadas (análises de cenário, pesquisas de mercado, tendências). O sistema que apoia é o SIG/EIS.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p8')"><div class="exercise-header-left"><span class="exercise-number">Q 08</span><span class="exercise-statement">O SIG (Sistema de Informação Gerencial) é alimentado por quais sistemas operacionais?</span></div><button class="toggle-btn" id="btnp8">▼</button></div><div class="collapsible" id="p8"><div class="exercise-body"><div class="block"><div class="block-label">Contexto</div><div class="phrase"><p>O SIG não gera dados — ele consolida dados de outros sistemas.</p><p>Fornece dashboards e relatórios para a alta gestão.</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>Os sistemas que geram dados transacionais do dia a dia da empresa são os que alimentam o SIG.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">ERP + CRM + SCM</div><div class="answer-name valid">ERP, CRM e SCM</div><div class="answer-desc">O SIG (EIS) é alimentado pelos sistemas transacionais: ERP (dados financeiros, RH, estoque), CRM (dados de clientes e vendas) e SCM (cadeia de suprimentos). Ele transforma esses dados em informação gerencial.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p9')"><div class="exercise-header-left"><span class="exercise-number">Q 09</span><span class="exercise-statement">Um vendedor experiente explica seu método de abordagem ao cliente para um estagiário em uma conversa presencial. Qual modo do SECI é esse?</span></div><button class="toggle-btn" id="btnp9">▼</button></div><div class="collapsible" id="p9"><div class="exercise-body"><div class="block"><div class="block-label">O modelo SECI</div><div class="phrase"><p>Socialização: Tácito → Tácito (conversa, observação)</p><p>Externalização: Tácito → Explícito (escrever, documentar)</p><p>Combinação: Explícito → Explícito (juntar documentos)</p><p>Internalização: Explícito → Tácito (aprender do manual)</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>O vendedor transmite conhecimento tácito (método de abordagem, que está na cabeça dele) para o estagiário de forma presencial e informal — não há documentação.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">S</div><div class="answer-name valid">Socialização — Tácito → Tácito</div><div class="answer-desc">A Socialização é a transferência de conhecimento tácito para tácito por meio de experiências compartilhadas (observação, prática conjunta, mentoria). Não há documento — o conhecimento flui de pessoa para pessoa diretamente.</div></div></div></div></div></div>
+
+    <div class="exercise"><div class="exercise-header" onclick="toggle('p10')"><div class="exercise-header-left"><span class="exercise-number">Q 10</span><span class="exercise-statement">Um gerente de RH documenta sua experiência de anos em processos seletivos criando um manual escrito. Qual modo do SECI é esse?</span></div><button class="toggle-btn" id="btnp10">▼</button></div><div class="collapsible" id="p10"><div class="exercise-body"><div class="block"><div class="block-label">Identificação do fluxo</div><div class="phrase"><p>O gerente tem conhecimento tácito (anos de experiência).</p><p>Ele converte isso em um manual (explícito).</p><p>Tácito → Explícito = qual modo?</p></div></div><div class="block"><div class="block-label">Raciocínio</div><div class="phrase"><p>A chave é: algo que estava apenas na cabeça (tácito) foi transformado em algo documentado (explícito). Isso é "exteriorizar" o conhecimento.</p></div></div><div class="answer-block"><div class="answer-icon valid">✓</div><div class="answer-text"><div class="answer-letter">E</div><div class="answer-name valid">Externalização — Tácito → Explícito</div><div class="answer-desc">A Externalização converte conhecimento tácito em explícito — captura o que está na cabeça das pessoas em forma de documentos, manuais, fluxogramas, vídeos. É a conversão mais valiosa para as organizações porque preserva o conhecimento independentemente das pessoas.</div></div></div></div></div></div>
+
+    <div class="footer"><div class="footer-text">PSI — SISTEMAS DE INFORMAÇÃO — UNIP 2026</div><div class="score">10/10 ✓ Gabarito completo</div></div>
+  </div>
+</div>
+</div>
+<div class="materia" id="mat-emp">
+<div class="page">
+  <div class="header">
+    <div class="header-tag">UNIP — Empreendedorismo</div>
+    <h1>Guia Completo de<br><span>Empreendedorismo</span></h1>
+    <p class="header-sub">Macetes, teorias da administração e elaboração do plano de negócios focados na sua prova.</p>
+    <div class="header-line"></div>
+  </div>
+  <div class="nav">
+    <button class="nav-btn active" onclick="showSection('emp','admin',this)">🏛️ Administração</button>
+    <button class="nav-btn" onclick="showSection('emp','comp',this)">🧠 Comportamento</button>
+    <button class="nav-btn" onclick="showSection('emp','perfil',this)">🚀 O Empreendedor</button>
+    <button class="nav-btn" onclick="showSection('emp','plano',this)">📝 Plano de Negócios</button>
+  </div>
+
+  <div class="section active" id="emp-admin">
+    <div class="section-title">Fundamentos da <span>Administração</span></div>
+    <div class="section-desc">Evolução histórica, teorias fundamentais e o papel do administrador segundo o Livro-Texto (Unidade I).</div>
+    <div class="macete-grid">
+      <div class="macete-card full hi">
+        <div class="macete-label">O Papel do Administrador</div>
+        <div class="macete-title">Tomada de Decisão</div>
+        <div class="macete-body">
+          Administração é um processo que visa a ações de tomada de decisão de planejamento, organização, direção e controle de recursos com o intuito de alcançar os objetivos da organização[cite: 88].<br><br>
+          <div class="hint"><strong>Essência:</strong> A essência do trabalho administrativo converge para o ato de tomar decisões sobre a gestão de recursos (humanos, físicos, tecnológicos e financeiros).</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Taylor e Ford</div>
+        <div class="macete-title">Escola Científica</div>
+        <div class="macete-body">
+          <span class="hlg">Frederick Taylor:</span> Considerado o "pai" da Administração Científica [cite: 129], propôs que a eficiência se obtém dividindo e especializando tarefas (Planejamento x Execução)[cite: 130].<br><br>
+          <span class="hlg">Henry Ford:</span> Inovou com a produção em massa, dia de trabalho de oito horas e duplicação do salário[cite: 152].
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Henri Fayol</div>
+        <div class="macete-title">Teoria Clássica</div>
+        <div class="macete-body">
+          Criador da Teoria Clássica[cite: 133], Fayol definiu que as funções administrativas integram as funções técnicas, comerciais, financeiras, contábeis e de segurança da empresa.<br><br>
+          <strong>Função Administrativa:</strong> Prever (planejar), Organizar, Comandar, Coordenar e Controlar[cite: 138].
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Macete Importante</div>
+        <div class="macete-title">Os 3 Níveis de Planejamento</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Nível</th><th>Prazo</th><th>Amplitude</th><th>Foco</th></tr>
+            <tr><td class="hlg">Estratégico</td><td class="mc">Longo</td><td class="mc">A empresa como um todo</td><td class="hl">Decisões de alto risco e incerteza [cite: 266]</td></tr>
+            <tr><td class="hl">Tático</td><td class="mc">Médio</td><td class="mc">Por departamentos / áreas</td><td class="hl">Busca eficiência dos processos [cite: 267]</td></tr>
+            <tr><td class="hlb">Operacional</td><td class="mc">Curto</td><td class="mc">Tarefas específicas</td><td class="hlb">Ações do dia a dia das operações [cite: 268]</td></tr>
+          </table></div>
+          <div class="hint"><strong>Dica de prova:</strong> Se a decisão é genérica, ampla e de longo prazo, é sempre Estratégica! Se aborda operações em separado, é Operacional.</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Funções da Administração</div>
+        <div class="macete-title">Planejar, Organizar, Dirigir, Controlar (PODC)</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Função</th><th>O que faz?</th><th>Tópico Chave [cite: 239]</th></tr>
+            <tr><td class="hlg">Planejamento</td><td class="mc">O que fazer? Por que fazer? Como fazer?</td><td class="mc">Missão, visão, estratégias</td></tr>
+            <tr><td class="hl">Organização</td><td class="mc">Quem vai fazer? Onde fazer? Quando?</td><td class="mc">Estrutura e delegação de autoridades</td></tr>
+            <tr><td class="hl">Direção</td><td class="mc">Conduz pessoas para o objetivo.</td><td class="mc">Liderança, motivação, comando eficaz</td></tr>
+            <tr><td class="hlb">Controle</td><td class="mc">Mede e corrige o desempenho.</td><td class="mc">Comparação com padrões e correções</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="emp-comp">
+    <div class="section-title">Aspectos <span>Comportamentais</span></div>
+    <div class="section-desc">Entendendo as dinâmicas humanas dentro das organizações: liderança, clima e motivação.</div>
+    <div class="macete-grid">
+      <div class="macete-card hi">
+        <div class="macete-label">Liderança</div>
+        <div class="macete-title">Chefe vs Líder</div>
+        <div class="macete-body">
+          A liderança é um processo de influência onde o líder não precisa necessariamente ser o dono, mas sim a pessoa capaz de engajar e conduzir o grupo rumo aos objetivos.<br><br>
+          <div class="hint"><strong>Dica:</strong> Liderança é conquista. Autoridade é imposta (delegação de poder).</div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Clima Organizacional</div>
+        <div class="macete-title">A atmosfera da empresa</div>
+        <div class="macete-body">
+          O clima reflete a percepção atual dos funcionários sobre o ambiente de trabalho. É mutável e diretamente influenciado pelo estilo de liderança, reconhecimento e motivação.<br><br>
+          <strong>Diferença chave:</strong> Cultura é a raiz (valores); Clima é a folhagem (humor atual).
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Tomada de Decisão</div>
+        <div class="macete-title">Racionalidade Limitada</div>
+        <div class="macete-body">
+          Nenhum gestor ou empreendedor toma decisões em cenários de 100% de certeza. A <strong>Racionalidade Limitada</strong> significa que tomamos a melhor decisão possível considerando:
+          <br><br>
+          <span class="hlg">1.</span> O tempo que temos disponível.<br>
+          <span class="hlg">2.</span> As informações (sempre incompletas) que possuímos.<br>
+          <span class="hlg">3.</span> A nossa capacidade cognitiva e emocional.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="emp-perfil">
+    <div class="section-title">O Perfil <span>Empreendedor</span></div>
+    <div class="section-desc">Características fundamentais de quem inova, assume riscos e transforma cenários.</div>
+    <div class="macete-grid">
+      <div class="macete-card full hi">
+        <div class="macete-label">Conceito</div>
+        <div class="macete-title">O que é ser Empreendedor?</div>
+        <div class="macete-body">
+          Não é apenas abrir um negócio. O empreendedor é a "energia da economia", alguém que <strong>imagina, desenvolve e realiza visões</strong>. Ele identifica oportunidades onde outros veem problemas.<br><br>
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Empreendedor</th><th>Gerente-Proprietário</th></tr>
+            <tr><td class="hlg">Focado no futuro e na inovação</td><td class="mc">Focado no presente e na operação</td></tr>
+            <tr><td class="hlg">Assume riscos calculados</td><td class="mc">Evita riscos para manter estabilidade</td></tr>
+            <tr><td class="hlg">Cria novos mercados</td><td class="mc">Mantém o mercado existente</td></tr>
+          </table></div>
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">O Mito</div>
+        <div class="macete-title">Empreendedor nasce pronto?</div>
+        <div class="macete-body">
+          <span class="hlr">Falso!</span> O empreendedorismo <strong>pode ser ensinado e aprendido</strong>.<br><br>Não é um traço genético ou dom místico, mas um conjunto de comportamentos, técnicas de gestão e habilidades de planejamento (Plano de Negócios).
+        </div>
+      </div>
+      <div class="macete-card">
+        <div class="macete-label">Importância Econômica</div>
+        <div class="macete-title">As PMEs no Brasil</div>
+        <div class="macete-body">
+          As Pequenas e Médias Empresas (PMEs) são a <strong>espinha dorsal da economia</strong>.
+          Elas são as maiores responsáveis pela <strong>geração de empregos</strong>, distribuição de renda e desenvolvimento regional no país.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="emp-plano">
+    <div class="section-title">Oportunidades e <span>Plano de Negócios</span></div>
+    <div class="section-desc">Como transformar uma faísca em um projeto validado e rentável.</div>
+    <div class="macete-grid">
+      <div class="macete-card full hi">
+        <div class="macete-label">O Grande Segredo (Cai na prova!)</div>
+        <div class="macete-title">Ideia vs Oportunidade</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Ideia</th><th>Oportunidade</th></tr>
+            <tr><td class="hlr">É apenas um pensamento solto na cabeça.</td><td class="hlg">É uma ideia testada e validada.</td></tr>
+            <tr><td class="hlr">Não tem comprovação de mercado.</td><td class="hlg">Existe demanda (clientes dispostos a pagar).</td></tr>
+            <tr><td class="hlr">"E se a gente fizesse..."</td><td class="hlg">Ocorre no timing certo, com os recursos certos.</td></tr>
+          </table></div>
+          <div class="hint"><strong>Mitos perigosos:</strong> "Minha ideia é única, por isso não preciso de plano" e "Não tenho concorrentes, então o sucesso é garantido". Ideias não valem nada sem execução!</div>
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">A Ferramenta</div>
+        <div class="macete-title">O Plano de Negócios (Business Plan)</div>
+        <div class="macete-body">
+          É um documento estratégico e dinâmico (não é estático!) que descreve por escrito os objetivos de um negócio e quais passos devem ser dados para alcançá-los.<br><br>
+          <span class="hlg">Para que serve?</span><br>
+          1. <strong>Diminuir riscos:</strong> Permite errar no papel antes de errar no mercado gastando dinheiro.<br>
+          2. <strong>Atrair capital:</strong> Bancos e investidores exigem o plano para liberar financiamento.<br>
+          3. <strong>Guiar o empreendedor:</strong> Serve como mapa de rota nos primeiros anos de vida.
+        </div>
+      </div>
+      <div class="macete-card full">
+        <div class="macete-label">Estrutura</div>
+        <div class="macete-title">Elementos cruciais de um Plano de Negócios</div>
+        <div class="macete-body">
+          <div class="mt-wrap"><table class="mt">
+            <tr><th>Seção</th><th>O que contém?</th></tr>
+            <tr><td class="hlg">Sumário Executivo</td><td class="mc">É a parte mais importante. Um resumo claro de todo o negócio para fisgar o leitor (feito por último).</td></tr>
+            <tr><td class="hlg">Análise de Mercado</td><td class="mc">Estudo detalhado dos Clientes (quem compra?), Concorrentes (quem já vende?) e Fornecedores.</td></tr>
+            <tr><td class="hlg">Plano de Marketing</td><td class="mc">Como você vai vender? Qual a estratégia de preço e distribuição?</td></tr>
+            <tr><td class="hlg">Plano Operacional</td><td class="mc">Como a empresa vai funcionar no dia a dia (capacidade, infraestrutura).</td></tr>
+            <tr><td class="hlg">Plano Financeiro</td><td class="mc">Investimento inicial, capital de giro, ponto de equilíbrio e DRE.</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
-</div><!-- fim materia comp -->
-
+</div>
 <script>
   function switchMateria(id, btn) {
     document.querySelectorAll('.materia').forEach(m => m.classList.remove('active'));
@@ -748,18 +986,15 @@
     document.getElementById('mat-' + id).classList.add('active');
     btn.classList.add('active');
     document.body.className = id;
-    // ativa primeira aba da matéria
     const firstNav = document.querySelector('#mat-' + id + ' .nav-btn');
     if (firstNav) firstNav.click();
   }
-
   function showSection(materia, id, btn) {
     document.querySelectorAll('#mat-' + materia + ' .section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('#mat-' + materia + ' .nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(materia + '-' + id).classList.add('active');
     btn.classList.add('active');
   }
-
   function toggle(n) {
     document.getElementById(n).classList.toggle('open');
     document.getElementById('btn'+n).classList.toggle('open');
