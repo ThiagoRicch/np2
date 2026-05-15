@@ -107,6 +107,17 @@ body{color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;padding:
   .exercise-header{padding:12px 14px;}
   .exercise-statement{font-size:12px;}
 }
+
+  /* SO/EST/DS: estrutura de card com h2/h3/p/ul */
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:16px;}
+  .card h2{font-size:18px;font-weight:800;margin-bottom:14px;color:var(--text);}
+  .card h3{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--accent);}
+  .card p{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:8px;}
+  .card p strong{color:var(--text);}
+  .card ul{padding-left:18px;margin-bottom:8px;}
+  .card li{font-size:13px;color:var(--muted);line-height:1.8;}
+  .card li strong{color:var(--text);}
+  .card .code-block{margin-top:12px;}
 </style>
 </head>
 <body class="dh">
@@ -435,13 +446,13 @@ body{color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;padding:
 <!-- ===== FUNDAMENTOS DE SISTEMAS OPERACIONAIS ===== -->
 <div id="mat-so" class="materia">
 
-  <div class="sections-nav" id="nav-so">
-    <button class="snav-btn active" onclick="showSection('so','intro')">Introducao</button>
-    <button class="snav-btn" onclick="showSection('so','processos')">Processos</button>
-    <button class="snav-btn" onclick="showSection('so','memoria')">Memoria</button>
-    <button class="snav-btn" onclick="showSection('so','arquivos')">Sist. de Arquivos</button>
-    <button class="snav-btn" onclick="showSection('so','arquitetura')">Arquitetura CPU</button>
-    <button class="snav-btn" onclick="showSection('so','exercicios')">Exercicios</button>
+  <div class="nav" id="nav-so">
+    <button class="nav-btn active" onclick="showSection('so','intro',this)">Introducao</button>
+    <button class="nav-btn" onclick="showSection('so','processos',this)">Processos</button>
+    <button class="nav-btn" onclick="showSection('so','memoria',this)">Memoria</button>
+    <button class="nav-btn" onclick="showSection('so','arquivos',this)">Sist. de Arquivos</button>
+    <button class="nav-btn" onclick="showSection('so','arquitetura',this)">Arquitetura CPU</button>
+    <button class="nav-btn" onclick="showSection('so','exercicios',this)">Exercicios</button>
   </div>
 
   <!-- INTRO SO -->
@@ -819,13 +830,13 @@ Problema: disco e muito mais lento que RAM → thrashing se abusado</div>
 <!-- ===== ESTATISTICA ===== -->
 <div id="mat-est" class="materia">
 
-  <div class="sections-nav" id="nav-est">
-    <button class="snav-btn active" onclick="showSection('est','conceitos')">Conceitos Basicos</button>
-    <button class="snav-btn" onclick="showSection('est','central')">Tendencia Central</button>
-    <button class="snav-btn" onclick="showSection('est','dispersao')">Dispersao</button>
-    <button class="snav-btn" onclick="showSection('est','frequencia')">Distribuicao de Frequencias</button>
-    <button class="snav-btn" onclick="showSection('est','probabilidade')">Probabilidade</button>
-    <button class="snav-btn" onclick="showSection('est','exercicios')">Exercicios</button>
+  <div class="nav" id="nav-est">
+    <button class="nav-btn active" onclick="showSection('est','conceitos',this)">Conceitos Basicos</button>
+    <button class="nav-btn" onclick="showSection('est','central',this)">Tendencia Central</button>
+    <button class="nav-btn" onclick="showSection('est','dispersao',this)">Dispersao</button>
+    <button class="nav-btn" onclick="showSection('est','frequencia',this)">Distribuicao de Frequencias</button>
+    <button class="nav-btn" onclick="showSection('est','probabilidade',this)">Probabilidade</button>
+    <button class="nav-btn" onclick="showSection('est','exercicios',this)">Exercicios</button>
   </div>
 
   <!-- CONCEITOS BASICOS -->
@@ -1218,13 +1229,13 @@ Z indica quantos desvios padroes x esta da media.</div>
 <!-- ===== DESENVOLVIMENTO SUSTENTAVEL ===== -->
 <div id="mat-ds" class="materia">
 
-  <div class="sections-nav" id="nav-ds">
-    <button class="snav-btn active" onclick="showSection('ds','conceito')">Conceito e Historia</button>
-    <button class="snav-btn" onclick="showSection('ds','dimensoes')">Dimensoes</button>
-    <button class="snav-btn" onclick="showSection('ds','gestao')">Gestao Ambiental</button>
-    <button class="snav-btn" onclick="showSection('ds','certificacoes')">Certificacoes</button>
-    <button class="snav-btn" onclick="showSection('ds','greenti')">Green TI</button>
-    <button class="snav-btn" onclick="showSection('ds','exercicios')">Exercicios</button>
+  <div class="nav" id="nav-ds">
+    <button class="nav-btn active" onclick="showSection('ds','conceito',this)">Conceito e Historia</button>
+    <button class="nav-btn" onclick="showSection('ds','dimensoes',this)">Dimensoes</button>
+    <button class="nav-btn" onclick="showSection('ds','gestao',this)">Gestao Ambiental</button>
+    <button class="nav-btn" onclick="showSection('ds','certificacoes',this)">Certificacoes</button>
+    <button class="nav-btn" onclick="showSection('ds','greenti',this)">Green TI</button>
+    <button class="nav-btn" onclick="showSection('ds','exercicios',this)">Exercicios</button>
   </div>
 
   <!-- CONCEITO E HISTORIA -->
