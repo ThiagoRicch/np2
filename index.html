@@ -119,6 +119,12 @@ body{color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;padding:
   .card li{font-size:13px;color:var(--muted);line-height:1.8;}
   .card li strong{color:var(--text);}
   .card .code-block{margin-top:12px;}
+  .exercise .ex-q{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;font-size:14px;font-weight:600;line-height:1.4;color:var(--text);}
+  .exercise .ex-q::after{content:'\25BE';font-size:16px;color:var(--muted);transition:color 0.2s,transform 0.2s;flex-shrink:0;margin-left:12px;}
+  .exercise .ex-q.open::after{color:var(--accent);transform:rotate(180deg);}
+  .exercise .ex-a{display:none;padding:20px;background:var(--bg3);color:var(--muted);font-size:13px;line-height:1.8;}
+  .exercise .ex-a.open{display:block;}
+  .exercise .ex-a strong{color:var(--text);}
 </style>
 </head>
 <body class="dh">
@@ -1646,9 +1652,23 @@ function showSection(materia, id, btn) {
   btn.classList.add('active');
 }
 
-function toggle(n) {
-  document.getElementById(n).classList.toggle('open');
-  document.getElementById('btn'+n).classList.toggle('open');
+function toggle(target) {
+  if (typeof target === 'string') {
+    const panel = document.getElementById(target);
+    const btn = document.getElementById('btn' + target);
+    if (panel) panel.classList.toggle('open');
+    if (btn) btn.classList.toggle('open');
+    return;
+  }
+
+  const question = target && target.classList && target.classList.contains('ex-q') ? target : null;
+  if (!question) return;
+
+  const answer = question.nextElementSibling;
+  if (!answer || !answer.classList.contains('ex-a')) return;
+
+  const isOpen = answer.classList.toggle('open');
+  question.classList.toggle('open', isOpen);
 }
 </script>
 </body>
