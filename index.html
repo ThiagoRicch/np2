@@ -38,6 +38,9 @@ body{color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;padding:
 .macete-card:hover{border-color:var(--accent);}
 .macete-card.full{grid-column:1/-1;}
 .macete-card.hi{border-color:var(--accent);}
+.materia#mat-dh .macete-grid,.materia#mat-com .macete-grid{display:block;margin-bottom:24px;}
+.materia#mat-dh .macete-card,.materia#mat-com .macete-card{border-left:3px solid var(--accent);padding:20px 24px;margin-bottom:16px;}
+.materia#mat-dh .macete-card.full,.materia#mat-com .macete-card.full{grid-column:auto;}
 .macete-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
 .macete-title{font-size:15px;font-weight:700;margin-bottom:10px;}
 .macete-body{font-size:13px;color:var(--muted);line-height:1.8;}
@@ -102,6 +105,8 @@ body{color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;padding:
   .exercise-body{grid-template-columns:1fr!important;gap:10px;padding:12px;}
   .answer-block{grid-column:1!important;}
   .macete-card{padding:14px;}
+  .materia#mat-dh .macete-grid,.materia#mat-com .macete-grid{display:block!important;gap:0!important;}
+  .materia#mat-dh .macete-card,.materia#mat-com .macete-card{padding:14px 16px;}
   .mt{font-size:11px;min-width:340px;}
   .code-block{font-size:10px;}
   .exercise-header{padding:12px 14px;}
